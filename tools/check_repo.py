@@ -147,6 +147,24 @@ def main() -> int:
             note(f"docs/ESTIMATE.md: the worked example does not match the tool, missing "
                  f"{line.strip()!r}")
 
+    # 5b. every relative link resolves. A page once pointed at a file that did not exist.
+    link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in (".git", "__pycache__")]
+        for name in filenames:
+            if not name.endswith(".md"):
+                continue
+            src = os.path.join(dirpath, name)
+            rel = os.path.relpath(src, ROOT).replace(os.sep, "/")
+            with open(src, encoding="utf-8") as fh:
+                body = fh.read()
+            for target in link.findall(body):
+                target = target.split("#")[0].strip()
+                if not target or target.startswith(("http://", "https://", "mailto:")):
+                    continue
+                if not os.path.exists(os.path.normpath(os.path.join(dirpath, target))):
+                    note(f"{rel}: dead link to {target!r}")
+
     # 6. a kit and its codebase page publish the same numbers, to their own precision
     row = re.compile(r"\|\s*(tool calls|cost per case)\s*\|\s*\$?([\d.]+)\s*\|\s*\$?([\d.]+)\s*\|")
     for stack in KITS:
