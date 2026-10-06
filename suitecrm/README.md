@@ -27,6 +27,16 @@ maintainers actually wrote.
 ✓ marks a difference that held on all ten resamplings and in both replicates. A row without
 one moved but did not clear that bar, and is printed anyway.
 
+## Why there is no benchmark kit here
+
+Six of the nine codebases in this repository ship one. This is not one of them: the second
+study was not run on this codebase, and we do not hand over an instrument we have not run
+against it ourselves. What is published above is the first study, which is the measurement
+that matters most — the package against nothing at all.
+
+An engagement builds the kit for your repository, from your own history, and you keep it.
+See [what an engagement leaves behind](../docs/ENGAGEMENT.md).
+
 ## Estimate it for a repository this size
 
 ```
