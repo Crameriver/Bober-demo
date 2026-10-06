@@ -1,0 +1,24 @@
+{
+  "case": "case-006",
+  "files": [
+    "media/config_test.go",
+    "output/outputFormat_test.go",
+    "config/security/securityConfig_test.go",
+    "tpl/tplimpl/template_funcs_test.go",
+    "media/builtin.go",
+    "output/outputFormat.go",
+    "config/security/securityConfig.go"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Derived two ways. (a) `git grep -n 'len(Default\\|\\.ToTOML()' -- '*_test.go'` over the whole repo returns the complete set of snapshot assertions: media/config_test.go:157 (`len(DefaultTypes) == 47`, plus relative forms at :48, :65, :87), output/outputFormat_test.go:71 (`len(DefaultFormats) == 15`), output/config_test.go:45 and :62 (relative to DefaultFormats, so self-adjusting), and config/security/securityConfig_test.go:135 (`DefaultConfig.ToTOML()` compared at :136-138 against one exact multi-line TOML string of every default policy). (b) The two hard-coded counts are confirmed as live tripw",
+  "files_unleaked": [
+    "config/security/securityConfig_test.go",
+    "tpl/tplimpl/template_funcs_test.go",
+    "media/builtin.go",
+    "output/outputFormat.go",
+    "config/security/securityConfig.go"
+  ]
+}

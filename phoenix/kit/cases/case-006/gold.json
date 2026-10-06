@@ -1,0 +1,28 @@
+{
+  "case": "case-006",
+  "files": [
+    "installer/test/mix_helper.exs",
+    "installer/templates/phx_web/components/core_components.ex.eex",
+    "test/support/router_helper.exs",
+    "test/support/http_client.exs",
+    "test/support/endpoint_helper.exs",
+    "test/support/websocket_client.exs",
+    "test/fixtures/views.exs",
+    "test/test_helper.exs",
+    "mix.exs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Because mix.exs:60 sets elixirc_paths to [\"lib\"] and mix.exs:46-49 excludes test/support and test/fixtures from discovery, nothing under them is autoloaded -- the only loading mechanisms are Code.require_file and direct File.read!. `git grep -n 'Code.require_file' -- test/` enumerates them exhaustively: 16 of the 20 root test files load installer/test/mix_helper.exs by the relative path ../../../installer/test/mix_helper.exs at line 1 (the four that do not are test/mix/phoenix_test.exs, test/mix/tasks/phx.digest.clean_test.exs, test/mix/tasks/phx.gen.auth/injector_test.exs, test/mix/tasks/phx_",
+  "files_unleaked": [
+    "installer/test/mix_helper.exs",
+    "installer/templates/phx_web/components/core_components.ex.eex",
+    "test/support/router_helper.exs",
+    "test/support/http_client.exs",
+    "test/support/endpoint_helper.exs",
+    "test/support/websocket_client.exs",
+    "test/fixtures/views.exs"
+  ]
+}

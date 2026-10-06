@@ -1,0 +1,33 @@
+{
+  "case": "case-000",
+  "files": [
+    "src/lexer.c",
+    "src/lexer.h",
+    "src/parser.c",
+    "src/parser.h",
+    "tests/man.test",
+    "tests/manonig.test",
+    "jq.1.prebuilt",
+    "docs/Pipfile.lock",
+    "src/jv_utf8_tables.h"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "src/builtin.inc",
+    "src/config_opts.inc",
+    "src/version.h",
+    "jq.1"
+  ],
+  "key_derivation": "Committed set read off .gitattributes:6-12, which marks exactly src/lexer.[ch], src/parser.[ch], tests/man.test, tests/manonig.test, jq.1.prebuilt and docs/Pipfile.lock as linguist-generated=true; src/jv_utf8_tables.h is the one generated-and-committed file NOT marked there and is caught by scripts/gen_utf8_tables.py:3 ('This program was used to generate jv_utf8_tables.gen.h') matching its content byte-for-byte in shape (lines 27-31 emit exactly the three tables the header defines). Generators: flex and bison (Makefile.am:38-39 and AM_YFLAGS at :57), docs/build_mantests.py:8-10, docs/build_man",
+  "files_unleaked": [
+    "src/lexer.c",
+    "src/lexer.h",
+    "src/parser.c",
+    "src/parser.h",
+    "tests/manonig.test",
+    "docs/Pipfile.lock",
+    "src/jv_utf8_tables.h"
+  ]
+}

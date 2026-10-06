@@ -1,0 +1,23 @@
+{
+  "case": "case-006",
+  "files": [
+    "global.json",
+    ".config/dotnet-tools.json",
+    "build.ps1",
+    "build.bat",
+    "cake.cs",
+    "Directory.Packages.props",
+    ".github/workflows/build.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Enumerated by file type and confirmed by the entry-point chain. `find . -name global.json -not -path './.git/*'` returns exactly one file: global.json:2-5 pins sdk.version 10.0.401 with allowPrerelease:false, lines 6-8 pin msbuild-sdks Cake.Sdk 6.3.0 (consumed by cake.cs:1 `#:sdk Cake.Sdk`), and lines 9-11 pin \"test\": {\"runner\": \"Microsoft.Testing.Platform\"}. `find . -name dotnet-tools.json` returns exactly one: .config/dotnet-tools.json, 10 tools with rollForward:false, restored by build.ps1:59-74 (`dotnet tool restore`). build.ps1:85 then runs `dotnet cake.cs -- --target=... --configuration=",
+  "files_unleaked": [
+    ".config/dotnet-tools.json",
+    "build.bat",
+    "cake.cs",
+    ".github/workflows/build.yml"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": "case-004",
+  "files": [
+    "tests/assets.rs",
+    "tests/system_wide_config.rs",
+    "tests/syntax-tests/regression_test.sh",
+    "tests/syntax-tests/test_custom_assets.sh",
+    "tests/scripts/license-checks.sh",
+    ".github/workflows/CICD.yml",
+    "tests/syntax-tests/create_highlighted_versions.py",
+    "tests/syntax-tests/compare_highlighted_versions.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`grep -rn \"#\\[ignore\\]\" tests/` returns exactly three hits in two files: tests/assets.rs:6 (all_themes_are_present, reason given at :3-4: it needs themes.bin up to date) and tests/system_wide_config.rs:9 and :21 (reason at :6-7 and :18-19: they need a system-wide config in place). Their commands are in committed files: `cargo test --locked --release --test assets -- --ignored` (CICD.yml:107) and `cargo test --locked --test system_wide_config -- --ignored` (CICD.yml:131, preceded by BAT_SYSTEM_CONFIG_PREFIX at :125 and a `cargo install` at :129). The non-cargo suites are the three shell scripts",
+  "files_unleaked": [
+    "tests/assets.rs",
+    "tests/system_wide_config.rs",
+    "tests/syntax-tests/regression_test.sh",
+    "tests/syntax-tests/test_custom_assets.sh",
+    "tests/scripts/license-checks.sh",
+    ".github/workflows/CICD.yml",
+    "tests/syntax-tests/create_highlighted_versions.py",
+    "tests/syntax-tests/compare_highlighted_versions.py"
+  ]
+}

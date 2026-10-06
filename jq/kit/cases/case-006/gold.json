@@ -1,0 +1,18 @@
+{
+  "case": "case-006",
+  "files": [
+    "src/main.c",
+    "docs/content/manual/dev/manual.yml",
+    "jq.1.prebuilt",
+    "tests/shtest"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "There is no option table \u2014 src/main.c:381-534 is a flat chain of isoption(&text, '<short>', \"<long>\", is_short) comparisons, and the help text is an independent block of string literals in usage() starting at src/main.c:49. Verified the four-place rule on a concrete option: --raw-output0 appears at src/main.c:79 (help), src/main.c:385 (parser), src/main.c:186 (its error message), tests/shtest:193-199 (test), plus the manual and jq.1.prebuilt \u2014 and its introducing commit a1e791a touches exactly {src/main.c, docs manual, jq.1.prebuilt, tests/shtest} with hunks at both @@ -74,8 (usage) and @@ -39",
+  "files_unleaked": [
+    "src/main.c",
+    "tests/shtest"
+  ]
+}

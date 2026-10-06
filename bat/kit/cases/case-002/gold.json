@@ -1,0 +1,27 @@
+{
+  "case": "case-002",
+  "files": [
+    "build/syntax_mapping.rs",
+    "src/syntax_mapping/builtin.rs",
+    "src/syntax_mapping.rs",
+    "src/syntax_mapping/ignored_suffixes.rs",
+    "src/assets.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/syntax_mapping/builtins/README.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "src/syntax_mapping/builtins/**/*.toml"
+  ],
+  "key_derivation": "Traced the include-chain and the call sites. The human-edited rules are the TOML files under src/syntax_mapping/builtins/, grouped into exactly six platform subdirectories \u2014 the list is hardcoded at build/syntax_mapping.rs:282-299 and nothing outside it is scanned. build/syntax_mapping.rs:330-348 reads them all (rejecting duplicate matchers at :339-345), :321-325 orders them by filename only, and :352-365 writes codegen_static_syntax_mappings.rs into OUT_DIR \u2014 that file is GENERATED and must not be looked for in the tree. src/syntax_mapping/builtin.rs:10-13 `include!`s it and :51-82 compiles e",
+  "files_unleaked": [
+    "src/syntax_mapping.rs",
+    "src/syntax_mapping/ignored_suffixes.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/syntax_mapping/builtins/README.md"
+  ]
+}

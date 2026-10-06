@@ -1,0 +1,30 @@
+{
+  "case": "case-004",
+  "files": [
+    "cake.cs",
+    "eng/stryker-config.json",
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly/Polly.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "src/Polly.Testing/Polly.Testing.csproj",
+    ".github/workflows/mutation-tests.yml",
+    ".config/dotnet-tools.json"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "The score is read from exactly one XPath, which pins the complete set. cake.cs:515 is `XmlPeek(target, \"/Project/PropertyGroup/MutationScore/text()\")`, and `grep -rn \"<MutationScore>\" --include=*.csproj` returns exactly five hits, all 100: Polly.csproj:8, Polly.Core.csproj:10, Polly.Extensions.csproj:9, Polly.RateLimiting.csproj:9, Polly.Testing.csproj:10. cake.cs:556 passes it to Stryker as `--break-at` with `--config-file eng/stryker-config.json`, whose thresholds high/low are both 100 (eng/stryker-config.json:27-30) and whose test-runner is 'mtp' / target-framework net10.0 (lines 25-26); th",
+  "files_unleaked": [
+    "cake.cs",
+    "eng/stryker-config.json",
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly/Polly.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "src/Polly.Testing/Polly.Testing.csproj",
+    ".github/workflows/mutation-tests.yml",
+    ".config/dotnet-tools.json"
+  ]
+}

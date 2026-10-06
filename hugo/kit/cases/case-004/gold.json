@@ -1,0 +1,26 @@
+{
+  "case": "case-004",
+  "files": [
+    "markup/converter/hooks/hooks.go",
+    "markup/goldmark/render_hooks.go",
+    "markup/goldmark/codeblocks/render.go",
+    "markup/goldmark/blockquotes/blockquotes.go",
+    "markup/goldmark/passthrough/passthrough.go",
+    "markup/goldmark/tables/tables.go",
+    "markup/goldmark/convert.go",
+    "hugolib/page__per_output.go"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Three independent enumerations that agree, which is what makes the key complete. (1) markup/converter/hooks/hooks.go:209-217 declares the `RendererType` enum with exactly 7 constants: Link, Image, Heading, CodeBlock, Passthrough, Blockquote, Table. (2) `git grep -n 'GetRenderer(' -- '*.go'` excluding tests returns exactly 8 call sites, covering all 7 types with Link appearing twice: markup/goldmark/render_hooks.go:130 (Image), :231 and :373 (Link), :454 (Heading); markup/goldmark/codeblocks/render.go:69; markup/goldmark/blockquotes/blockquotes.go:82; markup/goldmark/passthrough/passthrough.go:",
+  "files_unleaked": [
+    "markup/goldmark/render_hooks.go",
+    "markup/goldmark/codeblocks/render.go",
+    "markup/goldmark/blockquotes/blockquotes.go",
+    "markup/goldmark/passthrough/passthrough.go",
+    "markup/goldmark/tables/tables.go",
+    "markup/goldmark/convert.go"
+  ]
+}

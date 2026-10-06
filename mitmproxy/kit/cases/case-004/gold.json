@@ -1,0 +1,25 @@
+{
+  "case": "case-004",
+  "files": [
+    "mitmproxy/addons/__init__.py",
+    "mitmproxy/tools/dump.py",
+    "mitmproxy/tools/console/master.py",
+    "mitmproxy/tools/web/master.py",
+    "mitmproxy/master.py",
+    "mitmproxy/addons/onboarding.py",
+    "mitmproxy/addons/server_side_events.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Parsed mitmproxy/addons/__init__.py mechanically: 31 `from mitmproxy.addons import X` lines and 31 `X.Y()` entries in default_addons(), with an empty imported-but-unlisted difference; subtracting those from the 41 non-__init__ modules in mitmproxy/addons/ leaves exactly asgiapp, dumper, errorcheck, eventstore, intercept, keepserving, readfile, server_side_events, termlog, view. Then `git grep -n \"addons import <name>\\|addons\\.<name>\"` over mitmproxy/**.py for each of the ten located every instantiation site. server_side_events returns only two hits repo-wide - its own definition (mitmproxy/add",
+  "files_unleaked": [
+    "mitmproxy/tools/dump.py",
+    "mitmproxy/tools/console/master.py",
+    "mitmproxy/tools/web/master.py",
+    "mitmproxy/master.py",
+    "mitmproxy/addons/onboarding.py",
+    "mitmproxy/addons/server_side_events.py"
+  ]
+}

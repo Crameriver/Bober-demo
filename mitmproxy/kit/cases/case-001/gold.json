@@ -1,0 +1,23 @@
+{
+  "case": "case-001",
+  "files": [
+    "mitmproxy/hooks.py",
+    "docs/scripts/api-events.py",
+    "mitmproxy/script/concurrent.py",
+    "test/mitmproxy/test_hooks.py",
+    "test/mitmproxy/proxy/test_commands.py",
+    "test/mitmproxy/data/addonscripts/recorder/recorder.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`git grep -n all_hooks` returns exactly these 6 files. all_hooks is a plain module-level dict with no dynamic or string-based access anywhere, so grep is exhaustive. The failure path is then traced forward: api-events.py is executed by docs/build.py:9-13, which the `docs` CI job runs at .github/workflows/main.yml:203. Confirmed against history - be56a0af1, f997cd3a2 and 3cb87f5a2 each add or split a hook and each edits docs/scripts/api-events.py in the same commit. Bonus derivable from the same file: api-events.py:36-40 raises ValueError for a hook field whose type annotation has no resolvable",
+  "files_unleaked": [
+    "mitmproxy/hooks.py",
+    "mitmproxy/script/concurrent.py",
+    "test/mitmproxy/test_hooks.py",
+    "test/mitmproxy/proxy/test_commands.py",
+    "test/mitmproxy/data/addonscripts/recorder/recorder.py"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "case": "case-003",
+  "files": [
+    "src/lib.rs",
+    "Cargo.toml",
+    ".github/workflows/CICD.yml",
+    "src/pager.rs",
+    "src/paging.rs",
+    "src/lessopen.rs",
+    "src/diff.rs",
+    "src/assets/build_assets.rs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "src/lib.rs:24-64 is the ONLY module-declaration site in the library, so reading it is exhaustive by construction: `#[cfg(feature = \"lessopen\")] mod lessopen` (:37-38), `#[cfg(feature = \"paging\")] mod pager` (:42-43), `#[cfg(feature = \"paging\")] pub(crate) mod paging` (:44-45), and `#[cfg(feature = \"paging\")] pub use paging::PagingMode` (:63-64). The `git` feature gates items rather than whole modules (src/config.rs:12-18 VisibleLines::DiffContext, src/config.rs:14 `#[cfg(feature = \"git\")]`, and tests/snapshot_tests.rs:1 `#[cfg(feature = \"git\")]` for the whole snapshot suite). The feature graph",
+  "files_unleaked": [
+    "src/lib.rs",
+    ".github/workflows/CICD.yml",
+    "src/pager.rs",
+    "src/paging.rs",
+    "src/lessopen.rs",
+    "src/diff.rs",
+    "src/assets/build_assets.rs"
+  ]
+}

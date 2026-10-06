@@ -1,0 +1,28 @@
+{
+  "case": "case-002",
+  "files": [
+    "docs/content/manual/dev/manual.yml",
+    "jq.1.prebuilt",
+    "tests/man.test",
+    "tests/manonig.test",
+    "docs/build_manpage.py",
+    "docs/build_mantests.py",
+    "docs/validate_manual_schema.py",
+    "docs/manual_schema.yml",
+    "Makefile.am",
+    ".github/workflows/manpage.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Derived two independent ways that agree. (a) From the build graph: Makefile.am:166 declares tests/man.test and tests/manonig.test to depend on docs/content/manual/dev/manual.yml and to be produced by docs/validate_manual_schema.py + docs/build_mantests.py; Makefile.am:182 declares jq.1.prebuilt to depend on the same YAML via docs/build_manpage.py; Makefile.am:157 (check_DATA = tests/man.test) drags that into `make check`. (b) From history: a scripted pass over the 222 commits newer than c1d885b found the implication manual.yml -> jq.1.prebuilt holding 24/24 and jq.1.prebuilt -> manual.yml hold",
+  "files_unleaked": [
+    "tests/manonig.test",
+    "docs/build_manpage.py",
+    "docs/build_mantests.py",
+    "docs/validate_manual_schema.py",
+    "docs/manual_schema.yml",
+    ".github/workflows/manpage.yml"
+  ]
+}

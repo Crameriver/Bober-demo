@@ -1,0 +1,34 @@
+{
+  "case": "case-005",
+  "files": [
+    "src/linker.c",
+    "src/linker.h",
+    "src/parser.y",
+    "src/compile.c",
+    "src/compile.h",
+    "src/execute.c",
+    "src/builtin.c",
+    "src/main.c",
+    "src/jq_test.c",
+    "tests/modules/",
+    "tests/jq.test",
+    "tests/shtest",
+    "Makefile.am"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "src/linker.h declares exactly two entry points, load_program and load_module_meta (src/linker.h:4-5), both implemented in src/linker.c (:442, :416). Their only callers, found by grep over src/*.c, are src/execute.c:1241 (inside jq_compile) and src/builtin.c:1462 (modulemeta/1). The search path is a jq attribute: set at src/main.c:577 and src/jq_test.c:108 via jq_set_attr(..., \"JQ_LIBRARY_PATH\", ...) and read at src/execute.c:1271 \u2014 grep for JQ_LIBRARY_PATH returns exactly those four sites. The grammar for import/include is in src/parser.y and the binding in src/compile.c, confirmed by the comm",
+  "files_unleaked": [
+    "src/linker.c",
+    "src/linker.h",
+    "src/parser.y",
+    "src/compile.c",
+    "src/compile.h",
+    "src/execute.c",
+    "src/builtin.c",
+    "src/main.c",
+    "tests/shtest"
+  ]
+}

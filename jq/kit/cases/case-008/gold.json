@@ -1,0 +1,21 @@
+{
+  "case": "case-008",
+  "files": [
+    "Makefile.am",
+    "src/jq.h",
+    "src/jv.h",
+    "libjq.pc.in",
+    "src/jv_private.h"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "The rule is the literal linker flag at Makefile.am:64: only symbols matching the regex ^j[qv]_ are exported, and the ABI is pinned by -version-info 1:4:0 on the same line. The public surface is therefore the jq_*/jv_* declarations in the two headers that Makefile.am:71 installs \u2014 src/jq.h (jq_init, jq_compile, jq_compile_args, jq_start, jq_next, jq_teardown, the jq_set_*/jq_get_* callback and attribute pairs, the jq_util_input_* family, jq_set_colors, ...) and src/jv.h. The boundary is sharp and checkable: anything declared only in src/jv_private.h or in a non-installed header is internal even",
+  "files_unleaked": [
+    "src/jq.h",
+    "src/jv.h",
+    "libjq.pc.in",
+    "src/jv_private.h"
+  ]
+}

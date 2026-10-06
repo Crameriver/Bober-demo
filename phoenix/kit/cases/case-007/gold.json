@@ -1,0 +1,31 @@
+{
+  "case": "case-007",
+  "files": [
+    "lib/phoenix/logger.ex",
+    "lib/phoenix/router.ex",
+    "lib/phoenix/controller.ex",
+    "lib/phoenix/channel/server.ex",
+    "lib/phoenix/socket.ex",
+    "lib/phoenix/socket/pool_supervisor.ex",
+    "lib/phoenix/endpoint/supervisor.ex",
+    "lib/phoenix/endpoint/render_errors.ex",
+    "installer/templates/phx_web/telemetry.ex.eex",
+    "guides/telemetry.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "The catalogue is the lib/phoenix/logger.ex @moduledoc, which documents 9 event names with Measurement, Metadata and a 'Disable logging' line each (lines 10-71), and install/0 attaches handlers for 8 of them (lines 136-145; endpoint.init is documented as not logged). Checking it against reality: `git grep -n ':telemetry.execute(\\|:telemetry.span' -- lib/` returns 13 emit sites in 7 files, collapsing to exactly the same 9 distinct names (router_dispatch start/stop/exception in router.ex:417-447, controller.render in controller.ex:1001/1009, error_rendered in render_errors.ex:88, endpoint.init in",
+  "files_unleaked": [
+    "lib/phoenix/logger.ex",
+    "lib/phoenix/controller.ex",
+    "lib/phoenix/channel/server.ex",
+    "lib/phoenix/socket.ex",
+    "lib/phoenix/socket/pool_supervisor.ex",
+    "lib/phoenix/endpoint/supervisor.ex",
+    "lib/phoenix/endpoint/render_errors.ex",
+    "installer/templates/phx_web/telemetry.ex.eex",
+    "guides/telemetry.md"
+  ]
+}

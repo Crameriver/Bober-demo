@@ -1,0 +1,19 @@
+{
+  "case": "case-007",
+  "files": [
+    "test/filename_matching.py",
+    "pyproject.toml",
+    "test/individual_coverage.py",
+    ".github/workflows/main.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Both exemption sets are hard-coded literals read by exactly one script each, so the answer is the two literals - nothing dynamic can extend them. They are genuinely different and not nested: mitmproxy/tools/ is exempt wholesale from the matching-test rule (filename_matching.py:17) yet its files are listed one by one in the coverage exclude (pyproject.toml:196-227), and conversely mitmproxy/flow.py and mitmproxy/master.py are in the coverage exclude but are NOT exempt from needing a test file - test/mitmproxy/test_flow.py and test_master.py both exist. Live confirmation that the first gate is c",
+  "files_unleaked": [
+    "pyproject.toml",
+    "test/individual_coverage.py",
+    ".github/workflows/main.yml"
+  ]
+}

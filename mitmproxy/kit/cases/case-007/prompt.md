@@ -1,0 +1,1 @@
+Which source files are exempt from the 'every module has a matching test file' rule, and which are exempt from the 'every module is 100% covered by its own test file' rule? These are two different lists in two different files - name both, and name the CI jobs that read them.

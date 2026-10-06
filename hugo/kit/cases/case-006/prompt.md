@@ -1,0 +1,1 @@
+Name the committed tests that pin an exact snapshot of a default list or default configuration, so that adding a single entry anywhere in the product fails a test in a package you did not edit. For each, say what the number or string is.

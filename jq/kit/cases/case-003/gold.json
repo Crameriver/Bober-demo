@@ -1,0 +1,24 @@
+{
+  "case": "case-003",
+  "files": [
+    "src/opcode_list.h",
+    "src/bytecode.h",
+    "src/bytecode.c",
+    "src/execute.c",
+    "src/compile.c",
+    "src/compile.h"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "src/opcode_list.h is a pure x-macro list of OP(name, imm, in, out) lines (src/opcode_list.h:1-...), so the complete set of files that SEE a definition is exactly the includers: `grep -rn 'opcode_list.h' src/` returns src/bytecode.h:9 (OP -> enum member, src/bytecode.h:8), src/bytecode.h:16 (OP -> +1, the opcode count, src/bytecode.h:15) and src/bytecode.c:23 (OP -> descriptor table row, src/bytecode.c:19) and nothing else. The files that must additionally be edited to make a new opcode do anything are src/compile.c (emitter) and src/execute.c (interpreter), established from history rather than",
+  "files_unleaked": [
+    "src/opcode_list.h",
+    "src/bytecode.h",
+    "src/bytecode.c",
+    "src/execute.c",
+    "src/compile.c",
+    "src/compile.h"
+  ]
+}

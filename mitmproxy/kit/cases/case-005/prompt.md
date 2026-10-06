@@ -1,0 +1,1 @@
+An option named `foo` is added. Name the two places an option may be declared, every artifact that must be regenerated, the file that gives it a command-line flag, and state the exact rule for when the generated TypeScript must change.

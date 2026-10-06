@@ -1,0 +1,40 @@
+{
+  "case": "case-004",
+  "files": [
+    "configure.ac",
+    "src/jv.c",
+    "src/jv_parse.c",
+    "src/jv_print.c",
+    "src/builtin.c",
+    "src/jq_test.c",
+    "src/jv_dtoa.c",
+    "src/jv_dtoa.h",
+    "src/jv_dtoa_tsd.c",
+    "src/jv_dtoa_tsd.h",
+    "src/jv_private.h",
+    "vendor/decNumber/decNumber.c",
+    "vendor/decNumber/decContext.c",
+    "tests/jq.test",
+    "tests/man.test",
+    ".github/workflows/decnum.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`grep -rln USE_DECNUM src/ configure.ac Makefile.am tests/` returns exactly configure.ac, src/builtin.c, src/jq_test.c, src/jv.c, src/jv_parse.c, src/jv_print.c \u2014 that is the complete set of files with conditional decnum behaviour, and configure.ac:110-115 is where the macro is defined. `grep -rln 'decNumber.h|decContext.h' src/` returns only src/jv.c, so src/jv.c is the sole bridge to vendor/decNumber (wired in at Makefile.am:9-10,17). The surrounding dtoa machinery is the set returned by `grep -rln 'jvp_dtoa|jvp_strtod|dtoa_context' src/`. The must-still-pass requirement is .github/workflows",
+  "files_unleaked": [
+    "src/jv.c",
+    "src/jv_parse.c",
+    "src/jv_print.c",
+    "src/builtin.c",
+    "src/jv_dtoa.c",
+    "src/jv_dtoa.h",
+    "src/jv_dtoa_tsd.c",
+    "src/jv_dtoa_tsd.h",
+    "src/jv_private.h",
+    "vendor/decNumber/decNumber.c",
+    "vendor/decNumber/decContext.c",
+    ".github/workflows/decnum.yml"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "case": "case-000",
+  "files": [
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/config.rs",
+    "doc/long-help.txt",
+    "doc/short-help.txt",
+    "tests/integration_tests.rs",
+    "CHANGELOG.md",
+    "assets/completions/bat.bash.in",
+    "assets/completions/bat.fish.in",
+    "assets/completions/bat.zsh.in",
+    "assets/completions/_bat.ps1.in",
+    "assets/manual/bat.1.in"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Two independent derivations that agree. (a) Frequency over the 9 most recent non-merge flag-adding commits (061fb216, d7216316, 844bfded, cc5f782d, 167dda63, 8f99a78c, 70ff93d2, 9e8176b1, 7f089ead): src/bin/bat/clap_app.rs 9/9, src/bin/bat/app.rs 9/9, doc/long-help.txt 9/9, tests/integration_tests.rs 8/9, src/config.rs 7/9, doc/short-help.txt 6/9, the four assets/completions/*.in 3/9, assets/manual/bat.1.in 2/9, CHANGELOG.md 5/9. (b) Mechanical confirmation of the non-obvious members: doc/long-help.txt and doc/short-help.txt are the sole arguments of expect_test::expect_file! at tests/integrat",
+  "files_unleaked": [
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/config.rs",
+    "CHANGELOG.md",
+    "assets/completions/bat.bash.in",
+    "assets/completions/bat.fish.in",
+    "assets/completions/bat.zsh.in",
+    "assets/completions/_bat.ps1.in",
+    "assets/manual/bat.1.in"
+  ]
+}

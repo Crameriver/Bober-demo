@@ -1,0 +1,20 @@
+{
+  "case": "case-007",
+  "files": [
+    "output/outputFormat.go",
+    "media/builtin.go",
+    "media/config.go",
+    "media/config_test.go",
+    "output/outputFormat_test.go"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "output/outputFormat.go:224-239 lists exactly 15 entries in `DefaultFormats`, each a `Format` var declared at output/outputFormat.go:86-222, and every one of those vars sets `MediaType: media.Builtin.<X>Type` (e.g. AMPFormat -> media.Builtin.HTMLType at :89, CalendarFormat -> media.Builtin.CalendarType at :100). The `Builtin` struct fields are declared in media/builtin.go:3-70 and the MIME strings in `defaultMediaTypesConfig` at media/builtin.go:127 onward. media/config.go:35-62 is the binding: an `init()` that decodes `defaultMediaTypesConfig` into `DefaultTypes`, then reflects over every fiel",
+  "files_unleaked": [
+    "output/outputFormat.go",
+    "media/builtin.go",
+    "media/config.go"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "case": "case-006",
+  "files": [
+    ".gitmodules",
+    "assets/create.sh",
+    "assets/syntaxes.bin",
+    "assets/themes.bin",
+    "assets/acknowledgements.bin",
+    "assets/patches/",
+    "src/assets.rs",
+    "src/assets/build_assets.rs",
+    "src/bin/bat/assets.rs",
+    "doc/assets.md",
+    "README.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`grep -c \"\\[submodule\" .gitmodules` = 93. The answer is that a non-recursive clone still builds a fully functional bat, because the assets are committed as serialized blobs and embedded at compile time: src/assets.rs:378 `include_bytes!(\"../assets/syntaxes.bin\")`, :382 themes.bin, :387 acknowledgements.bin. What is missing is only the ability to REGENERATE them. That path is assets/create.sh: :8-40 initialises the submodules listed in .gitmodules, :43 `bat cache --clear`, :50-55 applies every assets/patches/*.patch (with a reverse trap at :57-67 so the working tree is restored), :69 `bat cache",
+  "files_unleaked": [
+    ".gitmodules",
+    "assets/syntaxes.bin",
+    "assets/themes.bin",
+    "assets/acknowledgements.bin",
+    "assets/patches/",
+    "src/assets/build_assets.rs",
+    "src/bin/bat/assets.rs",
+    "doc/assets.md",
+    "README.md"
+  ]
+}

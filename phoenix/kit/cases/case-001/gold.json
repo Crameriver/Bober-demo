@@ -1,0 +1,28 @@
+{
+  "case": "case-001",
+  "files": [
+    "lib/phoenix/socket/serializer.ex",
+    "lib/phoenix/socket/serializers/v1_json_serializer.ex",
+    "lib/phoenix/socket/serializers/v2_json_serializer.ex",
+    "lib/phoenix/transports/websocket.ex",
+    "lib/phoenix/transports/long_poll.ex",
+    "lib/phoenix/socket/message.ex",
+    "assets/js/phoenix/serializer.js",
+    "assets/js/phoenix/constants.js"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`git grep -n JSONSerializer -- lib` returns exactly four hits inside lib/: the two module definitions (v1_json_serializer.ex:1, v2_json_serializer.ex:1) and the two version->serializer default lists (lib/phoenix/transports/websocket.ex:29 and lib/phoenix/transports/long_poll.ex:20). No other site in lib/ maps a vsn string to a module, so the server side of the key is closed. The contract they must satisfy is the three @callbacks in lib/phoenix/socket/serializer.ex (fastlane!/1, encode!/1, decode!/2) over the structs in lib/phoenix/socket/message.ex. On the client, `git grep -n DEFAULT_VSN -- a",
+  "files_unleaked": [
+    "lib/phoenix/socket/serializer.ex",
+    "lib/phoenix/socket/serializers/v1_json_serializer.ex",
+    "lib/phoenix/socket/serializers/v2_json_serializer.ex",
+    "lib/phoenix/transports/websocket.ex",
+    "lib/phoenix/transports/long_poll.ex",
+    "lib/phoenix/socket/message.ex",
+    "assets/js/phoenix/serializer.js",
+    "assets/js/phoenix/constants.js"
+  ]
+}

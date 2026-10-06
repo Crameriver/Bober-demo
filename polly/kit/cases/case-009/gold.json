@@ -1,0 +1,37 @@
+{
+  "case": "case-009",
+  "files": [
+    ".github/workflows/lint.yml",
+    ".github/workflows/gh-pages.yml",
+    ".markdownlint.json",
+    ".github/spellcheck.yml",
+    ".github/wordlist.txt",
+    ".github/zizmor.yml",
+    ".github/workflows/code-ql.yml",
+    ".github/workflows/dependency-review.yml",
+    ".github/workflows/mutation-tests.yml",
+    "cake.cs",
+    "mdsnippets.json",
+    "eng/analyzers/BannedSymbols.txt",
+    ".editorconfig"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Enumerated from the workflow triggers, which is exhaustive by construction: `ls .github/workflows` lists 16 files and grepping their `on:` blocks shows exactly five that run on pull_request \u2014 build.yml:9, lint.yml:12, gh-pages.yml:8, mutation-tests.yml:8, code-ql.yml and dependency-review.yml. Mapping each to its config: lint.yml:44-52 actionlint + zizmor (persona pedantic, repo config .github/zizmor.yml) over the workflow YAML, lint.yml:54-75 PSScriptAnalyzer over every .ps1 with treat-warnings-as-errors; gh-pages.yml:31-38 markdownlint-cli2 with .markdownlint.json over **/*.md, gh-pages.yml:",
+  "files_unleaked": [
+    ".github/workflows/lint.yml",
+    ".github/workflows/gh-pages.yml",
+    ".markdownlint.json",
+    ".github/spellcheck.yml",
+    ".github/wordlist.txt",
+    ".github/zizmor.yml",
+    ".github/workflows/code-ql.yml",
+    ".github/workflows/dependency-review.yml",
+    ".github/workflows/mutation-tests.yml",
+    "cake.cs",
+    "mdsnippets.json",
+    "eng/analyzers/BannedSymbols.txt"
+  ]
+}

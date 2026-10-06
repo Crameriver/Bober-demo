@@ -1,0 +1,24 @@
+{
+  "case": "case-002",
+  "files": [
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly/Polly.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "eng/Library.targets",
+    "eng/Common.props"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Exhaustive grep, with a proof that no second mechanism exists. `grep -rn \"InternalsVisibleToProject\" --include=*.csproj --include=*.targets` returns exactly seven grants \u2014 Polly.Core.csproj:25-28 (Polly.Core.Benchmarks, Polly.Core.Tests, Polly.Testing, Polly.TestUtils), Polly.csproj:20 (Polly.Specs), Polly.Extensions.csproj:30 (Polly.Extensions.Tests), Polly.RateLimiting.csproj:25 (Polly.RateLimiting.Tests) \u2014 plus the generator at eng/Library.targets:45-49, which stamps each one as [InternalsVisibleTo] with $(PollyStrongNamePublicKey) from eng/Common.props:11 (needed because eng/Common.props:4",
+  "files_unleaked": [
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly/Polly.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "eng/Library.targets",
+    "eng/Common.props"
+  ]
+}

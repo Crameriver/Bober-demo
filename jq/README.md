@@ -1,68 +1,79 @@
 # jq
 
-**C · 83 source files · [https://github.com/jqlang/jq](https://github.com/jqlang/jq) · MIT**
+**C · 48 source files · 26,655 lines · [https://github.com/jqlang/jq](https://github.com/jqlang/jq) · MIT**
 
-12 real defect tickets from this project's own history, each run twice with no
-infrastructure and twice with it. 48 sessions.
+Forty-eight source files. An agent finds its own way, and the honest result is a
+gain too small to claim on any metric. It is published here rather than left out, because a
+claim about where something helps is worth what the claim about where it does not is worth.
+**At this size, our advice is not to buy the package.** The second study below is the
+interesting one for jq: a project this small can still be expensive to verify.
 
-| Per ticket | no infrastructure | with it | |
+## What was measured here
+
+12 real defect tickets from this project's own history. Each ticket was run twice with
+nothing installed and twice with the package installed, in runs placed at opposite ends of the
+day: 48 agent sessions. The agent's patch is compared by script against the one the
+maintainers actually wrote.
+
+| Per ticket | without | with the package | |
 |---|---|---|---|
-| Tokens per ticket | 348 264 | **308 143** | **−12%** |
-| Turns | 15.9 | **13.1** | **−18%** ✓ |
-| Tool calls | 17.5 | **15.9** | **−10%** |
-| Cost per ticket | $0.366 | **$0.312** | **−15%** |
-| Fix placed on the right file, of 12 | 10.5 | 11.0 | a tie |
+| Tokens | 348,264 | **308,143** | **−11.5%** |
+| Cost | $0.366 | **$0.312** | **−14.8%** |
+| Model turns | 15.9 | **13.1** | **−17.8%** |
+| Tool calls | 17.5 | **15.9** | **−9.5%** |
+| Fix landed on the right file, of 12 | 10.5 | 11.0 | a tie |
 | Sessions past 40 tool calls | 0 of 24 | 0 of 24 | |
 
-✓ marks a difference whose 95% interval excludes zero across all ten resamplings. A row
-without one moved in the right direction but not far enough to claim, and is printed anyway.
+✓ marks a difference that held on all ten resamplings and in both replicates. A row without
+one moved but did not clear that bar, and is printed anyway.
 
-## The deliverable
+## Fitting the package to this repository, measured on its own
 
-49 KB of plain text, of which **2.9 KB is resident** — reloaded on every turn of the conversation, and therefore the only part that costs anything while nothing is using it. The rest stays inert until something calls for it.
+One piece of the fitting, measured against the same package without it. 10 tickets,
+40 sessions, both arms run twice.
 
-| File | Size | |
-|---|---|---|
-| `.claude/agents/blast-radius.md` | 2 496 B | answers what else a change here touches |
-| `.claude/agents/reviewer.md` | 2 997 B | a reviewer that knows this project's conventions |
-| `.claude/hooks/kit_gates.json` | 14 976 B | the answers this codebase has already taught us, each with the moment it is worth delivering |
-| `.claude/hooks/kit_gates.py` | 7 523 B | delivers them, and stays out of the way otherwise |
-| `.claude/rules/context.md` | 2 986 B | **resident** — what this codebase's vocabulary hides, and where each kind of task starts. Reloaded every turn, so its size is the one hard budget. |
-| `docs/ai/reference.md` | 19 388 B | the long-form reference your engineers read |
+These are a different, question-shaped set of tasks from the table above, graded on how much
+of a reference answer the agent covered. The absolute figures are therefore **not comparable
+between the two tables** -- only the contrast inside each table is.
 
-### The opening of the resident core
+| Per ticket | package | package + that piece | |
+|---|---|---|---|
+| Cost | $0.223 | **$0.186** | **−16.6%** |
+| Tool calls | 15.8 | **10.2** | **−35.6%** ✓ |
+| Model turns | 6.6 | **5.3** | **−18.9%** ✓ |
+| Answer completeness | 0.633 | 0.680 | +7.5% |
 
-Verbatim — the first 1 089 bytes of 2 986.
+Across the six codebases in this study, two showed an established reduction and they are the
+two whose verification is hard to guess. Answer completeness improved on none of the six: the
+fitting makes the work cheaper where it works, it does not make the answers better.
 
-```markdown
-# jq — orientation
+## The benchmark, yours to keep
 
-C, ~27k lines in `src/`: `main.c` (CLI) -> `parser.y`+`lexer.l` (jq language) -> `compile.c`
-(IR) -> `execute.c` (`jq_next`, the VM) -> `jv*.c` (values). `jv_parse.c` parses JSON **input**,
-`parser.y` parses jq **programs** — different parsers.
+[`kit/`](kit/) is the instrument that produced the second table, self-contained: the cases,
+the runner, the analysis with its guards, and the audit trail of what was dropped from this
+page and why. Python standard library, no dependency on anything of ours, and it runs against
+your own checkout.
 
-## Misleading names
-
-| looks like | actually |
-|---|---|
-| "filter" = select/where | ANY jq program or expression. The predicate one is `select(f)`. |
-| `block` = braces | compiler IR: a list of `inst`, built by the `gen_*()` in `compile.c`. |
-| `jv_invalid()` | **end of output**; an *error* is `jv_invalid_with_msg()`. Same kind, so test `jv_invalid_has_msg`. |
-
-## Always true
-
-- **Never search `src/` bare.** 239 KB of committed bison/flex output swamps every hit, so
-  always exclude it: Grep tool glob `!{parser,lexer}.[ch]`, shell `grep -rn X src
-  --exclude=parser.[ch] --exclude=lexer.[ch]`. A hit in them is never where you edit — the
-  source is `parser.y`/`lexer.l`. Exclude `src/jv_dtoa.c` and `vendor/` too.
-- **Also generated, never hand-edit**: `jq.1.prebuilt`, `tests/man.test`, `tests/manonig.test`,
+```
+python kit/bench/run.py --arm bare  --rep r1
+python kit/bench/run.py --arm facts --rep r1
+python kit/bench/run.py --arm bare  --rep r2
+python kit/bench/run.py --arm facts --rep r2
+python kit/bench/analyse.py
 ```
 
-The rest of this file, the answers that accompany it and the conditions that decide when each one is delivered are the engagement's work and travel with it.
+Both replicates of both arms. They are not redundancy: the difference between an arm and
+itself is that day's noise floor, and the analysis uses it as a veto.
 
-## What made the difference here
+## Estimate it for a repository this size
 
-Eighty-three source files. An agent finds its own way, and the honest result is a gain too small to justify the work. It is published here rather than left out of the table, because a claim about where something helps is worth what the claim about where it does not is worth.
+```
+python ../tools/estimate.py --files 48 --loc 26655
+```
 
-See [why these numbers can be believed](../docs/EVIDENCE.md) for the protocol, and
-[working with us](../docs/ENGAGEMENT.md) for what an engagement on your own codebase involves.
+---
+
+[Why these numbers can be believed](../docs/EVIDENCE.md) ·
+[What gets installed](../docs/WHAT-IT-DOES.md) ·
+[What an engagement looks like](../docs/ENGAGEMENT.md) ·
+[Estimate your own repository](../docs/ESTIMATE.md)

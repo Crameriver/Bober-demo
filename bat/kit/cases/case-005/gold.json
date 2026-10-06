@@ -1,0 +1,25 @@
+{
+  "case": "case-005",
+  "files": [
+    "src/theme.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/bin/bat/config.rs",
+    "src/bin/bat/main.rs",
+    "src/assets.rs",
+    "src/lib.rs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Traced every reference to the theme module. src/theme.rs is the decision engine: `theme(ThemeOptions) -> ThemeResult` at :24, `default_theme(ColorScheme) -> &'static str` at :30, `color_scheme(DetectColorScheme) -> Option<ColorScheme>` at :38, the ThemeOptions/ThemePreference/ThemeName/DetectColorScheme/ColorScheme types at :45-182, and the actual terminal probe at :269 (`terminal_colorsaurus::theme_mode`, the crate's only use \u2014 `grep -rn colorsaurus src/` returns that one line). It is public API via src/lib.rs:52. The binary side: src/bin/bat/clap_app.rs defines --theme/--theme-dark/--theme-l",
+  "files_unleaked": [
+    "src/theme.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "src/bin/bat/config.rs",
+    "src/bin/bat/main.rs",
+    "src/lib.rs"
+  ]
+}

@@ -1,64 +1,78 @@
 # mitmproxy
 
-**Python · 808 source files · [https://github.com/mitmproxy/mitmproxy](https://github.com/mitmproxy/mitmproxy) · MIT**
+**Python · 472 source files · 68,824 lines · [https://github.com/mitmproxy/mitmproxy](https://github.com/mitmproxy/mitmproxy) · MIT**
 
-9 real defect tickets from this project's own history, each run twice with no
-infrastructure and twice with it. 36 sessions.
+A mid-sized Python codebase with a clean layout and an addon system that
+spreads one behaviour across several files. Model turns and tool calls both fell by a third and
+held up. Tokens fell 37% without clearing the bar on nine tickets. Every session that had run
+away stopped running away.
 
-| Per ticket | no infrastructure | with it | |
+## What was measured here
+
+9 real defect tickets from this project's own history. Each ticket was run twice with
+nothing installed and twice with the package installed, in runs placed at opposite ends of the
+day: 36 agent sessions. The agent's patch is compared by script against the one the
+maintainers actually wrote.
+
+| Per ticket | without | with the package | |
 |---|---|---|---|
-| Tokens per ticket | 738 974 | **464 192** | **−37%** |
-| Turns | 27.1 | **17.1** | **−37%** ✓ |
-| Tool calls | 29.2 | **19.2** | **−34%** ✓ |
-| Cost per ticket | $0.560 | **$0.450** | **−20%** |
-| Fix placed on the right file, of 9 | 4.5 | 4.0 | a tie |
+| Tokens | 738,974 | **464,192** | **−37.2%** |
+| Cost | $0.560 | **$0.450** | **−19.7%** |
+| Model turns | 27.1 | **17.1** | **−37.0%** ✓ |
+| Tool calls | 29.2 | **19.2** | **−34.1%** ✓ |
+| Fix landed on the right file, of 9 | 4.5 | 4.0 | a tie |
 | Sessions past 40 tool calls | 4 of 18 | 0 of 18 | |
 
-✓ marks a difference whose 95% interval excludes zero across all ten resamplings. A row
-without one moved in the right direction but not far enough to claim, and is printed anyway.
+✓ marks a difference that held on all ten resamplings and in both replicates. A row without
+one moved but did not clear that bar, and is printed anyway.
 
-## The deliverable
+## Fitting the package to this repository, measured on its own
 
-50 KB of plain text, of which **2.9 KB is resident** — reloaded on every turn of the conversation, and therefore the only part that costs anything while nothing is using it. The rest stays inert until something calls for it.
+One piece of the fitting, measured against the same package without it. 9 tickets,
+36 sessions, both arms run twice.
 
-| File | Size | |
-|---|---|---|
-| `.claude/agents/blast-radius.md` | 2 496 B | answers what else a change here touches |
-| `.claude/agents/reviewer.md` | 2 986 B | a reviewer that knows this project's conventions |
-| `.claude/hooks/kit_gates.json` | 15 636 B | the answers this codebase has already taught us, each with the moment it is worth delivering |
-| `.claude/hooks/kit_gates.py` | 7 523 B | delivers them, and stays out of the way otherwise |
-| `.claude/rules/context.md` | 2 995 B | **resident** — what this codebase's vocabulary hides, and where each kind of task starts. Reloaded every turn, so its size is the one hard budget. |
-| `docs/ai/reference.md` | 19 403 B | the long-form reference your engineers read |
+These are a different, question-shaped set of tasks from the table above, graded on how much
+of a reference answer the agent covered. The absolute figures are therefore **not comparable
+between the two tables** -- only the contrast inside each table is.
 
-### The opening of the resident core
+| Per ticket | package | package + that piece | |
+|---|---|---|---|
+| Cost | $0.206 | **$0.202** | **−1.9%** |
+| Tool calls | 12.8 | **12.3** | **−4.3%** |
+| Model turns | 5.6 | **6.1** | **+10.0%** |
+| Answer completeness | 0.766 | 0.789 | +2.9% |
 
-Verbatim — the first 1 077 bytes of 2 995.
+Across the six codebases in this study, two showed an established reduction and they are the
+two whose verification is hard to guess. Answer completeness improved on none of the six: the
+fitting makes the work cheaper where it works, it does not make the answers better.
 
-```markdown
-# mitmproxy
-Intercepting HTTP/TLS proxy. Three front-ends over one core: `mitmproxy` (urwid TUI,
-`tools/console/`), `mitmdump` (`tools/dump.py`), `mitmweb` (tornado `tools/web/` + React `web/`).
-Nearly every feature is an **addon**.
+## The benchmark, yours to keep
 
-## Commands (uv-managed; bare `pytest` is wrong)
-`uv run pytest test/mitmproxy/addons/test_view.py -k name` for one file.
-`uv run tox` | `-e lint` | `-e mypy` | `-e filename_matching` | `-e individual_coverage`.
-mitmweb client: `cd web && npm test` (also runs tsc).
+[`kit/`](kit/) is the instrument that produced the second table, self-contained: the cases,
+the runner, the analysis with its guards, and the audit trail of what was dropped from this
+page and why. Python standard library, no dependency on anything of ours, and it runs against
+your own checkout.
 
-## Vocabulary traps
-| you read | it is |
-|---|---|
-| `mitmproxy/test/` | shipped test *helpers* (tflow/taddons). The suite is `test/mitmproxy/`. |
-| "hook" | an addon callback: `class HttpRequestHook` -> `def http_request(self, flow)`, dispatched by `getattr(addon, hook.name)` in `addonmanager.py`, so grep finds no call site. |
-| `proxy/commands.py` | sans-io instructions a layer *yields*. Not `command.py`, the `:` command system of the UIs. |
-| `View` | `addons/view.py` = the flow list. Body pretty-printers are `contentviews/` (`Contentview`; `base.View` deprecated). |
+```
+python kit/bench/run.py --arm bare  --rep r1
+python kit/bench/run.py --arm facts --rep r1
+python kit/bench/run.py --arm bare  --rep r2
+python kit/bench/run.py --arm facts --rep r2
+python kit/bench/analyse.py
 ```
 
-The rest of this file, the answers that accompany it and the conditions that decide when each one is delivered are the engagement's work and travel with it.
+Both replicates of both arms. They are not redundancy: the difference between an arm and
+itself is that day's noise floor, and the analysis uses it as a veto.
 
-## What made the difference here
+## Estimate it for a repository this size
 
-A small, disciplined codebase with a layered core whose rules are strict and nowhere written down for a newcomer. The gain is real but smaller, and it arrives mostly as the disappearance of the sessions that wandered: four of twenty-four passed forty tool calls without the infrastructure, none with.
+```
+python ../tools/estimate.py --files 472 --loc 68824
+```
 
-See [why these numbers can be believed](../docs/EVIDENCE.md) for the protocol, and
-[working with us](../docs/ENGAGEMENT.md) for what an engagement on your own codebase involves.
+---
+
+[Why these numbers can be believed](../docs/EVIDENCE.md) ·
+[What gets installed](../docs/WHAT-IT-DOES.md) ·
+[What an engagement looks like](../docs/ENGAGEMENT.md) ·
+[Estimate your own repository](../docs/ESTIMATE.md)

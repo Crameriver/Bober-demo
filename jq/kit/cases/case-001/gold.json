@@ -1,0 +1,32 @@
+{
+  "case": "case-001",
+  "files": [
+    "Makefile.am",
+    "tests/setup",
+    "tests/mantest",
+    "tests/jqtest",
+    "tests/shtest",
+    "tests/utf8test",
+    "tests/base64test",
+    "tests/uritest",
+    "tests/optionaltest",
+    "tests/onigtest",
+    "tests/manonigtest"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "The set is exactly the union of the three TESTS assignments in Makefile.am (:143, :145, :208) \u2014 automake runs nothing else for `make check`. Each driver's data file is read off its single command line (tests/jqtest:5, tests/mantest:6, tests/base64test:5, tests/uritest:5, tests/optionaltest:5, tests/onigtest:5, tests/manonigtest:5); tests/shtest and tests/utf8test contain no --run-tests and are hand-written. The skip conditions are the two automake conditionals wrapping the TESTS += lines, whose definitions are configure.ac:52 (WIN32) and configure.ac:292 (WITH_ONIGURUMA). Complete because TEST",
+  "files_unleaked": [
+    "tests/setup",
+    "tests/mantest",
+    "tests/shtest",
+    "tests/utf8test",
+    "tests/base64test",
+    "tests/uritest",
+    "tests/optionaltest",
+    "tests/onigtest",
+    "tests/manonigtest"
+  ]
+}

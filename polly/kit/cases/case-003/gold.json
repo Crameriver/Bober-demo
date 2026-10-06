@@ -1,0 +1,30 @@
+{
+  "case": "case-003",
+  "files": [
+    "cake.cs",
+    "test/Polly.Core.Tests/Polly.Core.Tests.csproj",
+    "test/Polly.Extensions.Tests/Polly.Extensions.Tests.csproj",
+    "test/Polly.RateLimiting.Tests/Polly.RateLimiting.Tests.csproj",
+    "test/Polly.Testing.Tests/Polly.Testing.Tests.csproj",
+    "test/Polly.Specs/Polly.Specs.csproj",
+    "test/Polly.TestUtils/Polly.TestUtils.csproj",
+    "test/Polly.AotTest/Polly.AotTest.csproj",
+    "eng/Test.targets",
+    ".github/workflows/build.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Discovery is a single glob, so the set is exactly determined. cake.cs:144 (and 163, 239) is `GetFiles(\"./test/**/*{Tests,Specs}.csproj\")`; `ls test/*/*.csproj` lists seven projects, of which exactly five match: Polly.Core.Tests, Polly.Extensions.Tests, Polly.RateLimiting.Tests, Polly.Testing.Tests, Polly.Specs. The two non-matches are accounted for elsewhere \u2014 Polly.AotTest is published trimmed at cake.cs:124-139 and Polly.TestUtils is ProjectType=Library (test/Polly.TestUtils/Polly.TestUtils.csproj:5), a shared helper library. Thresholds come from cake.cs:429-448 reading <Threshold>/<Threshol",
+  "files_unleaked": [
+    "cake.cs",
+    "test/Polly.Extensions.Tests/Polly.Extensions.Tests.csproj",
+    "test/Polly.RateLimiting.Tests/Polly.RateLimiting.Tests.csproj",
+    "test/Polly.Testing.Tests/Polly.Testing.Tests.csproj",
+    "test/Polly.Specs/Polly.Specs.csproj",
+    "test/Polly.TestUtils/Polly.TestUtils.csproj",
+    "test/Polly.AotTest/Polly.AotTest.csproj",
+    ".github/workflows/build.yml"
+  ]
+}

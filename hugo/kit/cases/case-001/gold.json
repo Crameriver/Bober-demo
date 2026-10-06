@@ -1,0 +1,21 @@
+{
+  "case": "case-001",
+  "files": [
+    "resources/page/page.go",
+    "resources/page/page_nop.go",
+    "resources/page/testhelpers_test.go",
+    "hugolib/page.go",
+    "resources/page/page_marshaljson.autogen.go",
+    "resources/page/page_generate/generate_page_wrappers.go"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`git grep -n '_ page.Page\\|Page .*= new(\\|_ Page '` over all .go files returns exactly four compile-time assertions, and nothing else in the repo asserts `Page` conformance: resources/page/page_nop.go:45 (`NopPage Page = new(nopPage)`), resources/page/testhelpers_test.go:45 (`_ Page = (*testPage)(nil)`), hugolib/page.go:52 (`_ page.Page = (*pageState)(nil)`) and hugolib/page.go:938 (`_ page.Page = (*pageWithOrdinal)(nil)`). Each is a hard compile error if the method is missing, so the set of files that MUST change is exactly the set of files holding an assertion \u2014 this is why the key is comple",
+  "files_unleaked": [
+    "resources/page/page.go",
+    "resources/page/page_marshaljson.autogen.go",
+    "resources/page/page_generate/generate_page_wrappers.go"
+  ]
+}

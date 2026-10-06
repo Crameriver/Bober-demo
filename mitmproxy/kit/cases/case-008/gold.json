@@ -1,0 +1,26 @@
+{
+  "case": "case-008",
+  "files": [
+    "pyproject.toml",
+    "mitmproxy/tools/main.py",
+    "mitmproxy/tools/console/master.py",
+    "mitmproxy/tools/dump.py",
+    "mitmproxy/tools/web/master.py",
+    "mitmproxy/master.py",
+    "docs/scripts/options.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Two independent committed sources agree, which is what makes the key safe. [project.scripts] (pyproject.toml:101-104) is the only console-script table in the repo and names all three targets in mitmproxy.tools.main; docs/scripts/options.py:10-14 separately maps the same three tool names to the three Master classes in order to build the per-tool option badges in the docs. The per-tool addon sets are then read directly off each master's constructor, each of which calls addons.add(*addons.default_addons()) first and then its own extras. Complete because a fourth tool would have to appear in [proj",
+  "files_unleaked": [
+    "pyproject.toml",
+    "mitmproxy/tools/main.py",
+    "mitmproxy/tools/console/master.py",
+    "mitmproxy/tools/dump.py",
+    "mitmproxy/tools/web/master.py",
+    "mitmproxy/master.py",
+    "docs/scripts/options.py"
+  ]
+}

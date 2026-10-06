@@ -1,0 +1,26 @@
+{
+  "case": "case-007",
+  "files": [
+    "configure.ac",
+    "Makefile.am",
+    "config/m4/check-math-func.m4",
+    ".github/workflows/ci.yml",
+    ".github/workflows/decnum.yml",
+    ".github/workflows/oniguruma.yml",
+    ".github/workflows/valgrind.yml",
+    ".github/workflows/scanbuild.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Switch list = every AC_ARG_ENABLE / AC_ARG_WITH / AM_MAINTAINER_MODE in configure.ac (grep returns exactly the nine above plus configure.ac:18); consumer list = every `if <NAME>` block in Makefile.am, each of which must correspond to an AM_CONDITIONAL \u2014 the two lists match one-for-one, which is why the set is complete (an AM_CONDITIONAL with no `if` is dead, and an `if` with no AM_CONDITIONAL fails automake). USE_DECNUM is the odd one out: it is an AC_DEFINE (configure.ac:114) consumed by C preprocessor ifdefs, not by Makefile.am. Which combinations are actually exercised is read off the workf",
+  "files_unleaked": [
+    "config/m4/check-math-func.m4",
+    ".github/workflows/ci.yml",
+    ".github/workflows/decnum.yml",
+    ".github/workflows/oniguruma.yml",
+    ".github/workflows/valgrind.yml",
+    ".github/workflows/scanbuild.yml"
+  ]
+}

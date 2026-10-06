@@ -1,0 +1,30 @@
+{
+  "case": "case-007",
+  "files": [
+    "src/Polly/Polly.csproj",
+    "src/Polly/Properties/AssemblyInfo.cs",
+    "src/Polly/ResiliencePipelineConversionExtensions.cs",
+    "src/Polly/CompatibilitySuppressions.xml",
+    "src/Polly.Core/CompatibilitySuppressions.xml",
+    "eng/Library.targets",
+    "test/Polly.Specs/Polly.Specs.csproj",
+    "Directory.Build.targets",
+    "AGENTS.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Each link is a single committed declaration. src/Polly/Polly.csproj:24 is the only ProjectReference and it points at Polly.Core, so the dependency direction is fixed (AGENTS.md:40 states the intent). src/Polly/Properties/AssemblyInfo.cs:6-10 holds exactly five [assembly: TypeForwardedTo] entries (ExecutionRejectedException, TimeoutRejectedException, BrokenCircuitException, IsolatedCircuitException, CircuitState) \u2014 these are the types that physically moved to Polly.Core, added by d94f85fa, 94b309d0 and 5bf22393, with RS0016 suppressed at line 4 so they stay out of the PublicAPI baseline. Binary",
+  "files_unleaked": [
+    "src/Polly/Polly.csproj",
+    "src/Polly/Properties/AssemblyInfo.cs",
+    "src/Polly/ResiliencePipelineConversionExtensions.cs",
+    "src/Polly/CompatibilitySuppressions.xml",
+    "src/Polly.Core/CompatibilitySuppressions.xml",
+    "eng/Library.targets",
+    "test/Polly.Specs/Polly.Specs.csproj",
+    "Directory.Build.targets",
+    "AGENTS.md"
+  ]
+}

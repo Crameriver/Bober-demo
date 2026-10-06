@@ -1,0 +1,41 @@
+{
+  "case": "case-002",
+  "files": [
+    "installer/templates/phx_web/components/core_components.ex.eex",
+    "priv/static/phoenix.js",
+    "priv/static/phoenix.min.js",
+    "priv/static/phoenix.mjs",
+    "priv/static/phoenix.mjs.map",
+    "priv/static/phoenix.cjs.js",
+    "priv/static/phoenix.cjs.js.map",
+    "usage-rules/",
+    "mix.exs",
+    ".gitignore",
+    "installer/.gitignore",
+    "installer/mix.exs",
+    ".github/workflows/assets.yml",
+    "test/mix/tasks/phx.gen.live_test.exs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "priv/templates/phx.gen.live/core_components.ex.eex",
+    "installer/templates/phoenix-usage-rules/"
+  ],
+  "key_derivation": "Derived from the two .gitignore files plus the mix aliases that write the paths they name. .gitignore:25 ignores /priv/templates/phx.gen.live/core_components.ex.eex, which mix.exs:282-283 regenerates on every `compile` and `hex.publish` via copy_core_components/1 (mix.exs:300-307) from installer/templates/phx_web/components/core_components.ex.eex -- and test/mix/tasks/phx.gen.live_test.exs:33-34 asserts the two are byte-identical. installer/.gitignore:1 ignores templates/phoenix-usage-rules/, which installer/mix.exs:85-90 fills from the root usage-rules/ before hex.publish, and which installer",
+  "files_unleaked": [
+    "installer/templates/phx_web/components/core_components.ex.eex",
+    "priv/static/phoenix.js",
+    "priv/static/phoenix.min.js",
+    "priv/static/phoenix.mjs",
+    "priv/static/phoenix.mjs.map",
+    "priv/static/phoenix.cjs.js",
+    "priv/static/phoenix.cjs.js.map",
+    "usage-rules/",
+    ".gitignore",
+    "installer/.gitignore",
+    "installer/mix.exs",
+    "test/mix/tasks/phx.gen.live_test.exs"
+  ]
+}

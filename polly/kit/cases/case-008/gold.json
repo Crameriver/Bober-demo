@@ -1,0 +1,40 @@
+{
+  "case": "case-008",
+  "files": [
+    "src/Polly.Core/Timeout/TimeoutConstants.cs",
+    "src/Polly.Core/Timeout/TimeoutStrategyOptions.cs",
+    "src/Polly.Core/Timeout/TimeoutResilienceStrategy.cs",
+    "src/Polly.Core/Timeout/TimeoutResiliencePipelineBuilderExtensions.cs",
+    "src/Polly.Core/Timeout/OnTimeoutArguments.cs",
+    "src/Polly.Core/Timeout/TimeoutGeneratorArguments.cs",
+    "src/Polly.Core/Timeout/TimeoutRejectedException.cs",
+    "src/Polly.Core/Timeout/TimeoutUtil.cs",
+    "src/Polly.Core/ResiliencePipelineBuilderExtensions.cs",
+    "src/Polly.Core/ResilienceStrategy.cs",
+    "src/Polly.Core/ResilienceStrategy.TResult.cs",
+    "src/Polly.Core/ResilienceStrategyOptions.cs",
+    "docs/extensibility/proactive-strategy.md",
+    "docs/extensibility/reactive-strategy.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Derived by comparing every strategy folder, then proving the absence of a registry. `ls` of src/Polly.Core/{Retry,Timeout,CircuitBreaker,Hedging,Fallback} and src/Polly.Core/Simmy/{Behavior,Fault,Latency,Outcomes} shows the same five roles in all nine: <X>Constants.cs (DefaultName + the event-name string, e.g. TimeoutConstants.cs:5,7 'Timeout'/'OnTimeout'), <X>StrategyOptions.cs (+ a .TResult.cs partner for reactive strategies, carrying DataAnnotations such as the [Range] at src/Polly.Core/Retry/RetryStrategyOptions.TResult.cs:27), <X>ResilienceStrategy.cs, <X>ResiliencePipelineBuilderExtensio",
+  "files_unleaked": [
+    "src/Polly.Core/Timeout/TimeoutConstants.cs",
+    "src/Polly.Core/Timeout/TimeoutStrategyOptions.cs",
+    "src/Polly.Core/Timeout/TimeoutResilienceStrategy.cs",
+    "src/Polly.Core/Timeout/TimeoutResiliencePipelineBuilderExtensions.cs",
+    "src/Polly.Core/Timeout/OnTimeoutArguments.cs",
+    "src/Polly.Core/Timeout/TimeoutGeneratorArguments.cs",
+    "src/Polly.Core/Timeout/TimeoutRejectedException.cs",
+    "src/Polly.Core/Timeout/TimeoutUtil.cs",
+    "src/Polly.Core/ResiliencePipelineBuilderExtensions.cs",
+    "src/Polly.Core/ResilienceStrategy.cs",
+    "src/Polly.Core/ResilienceStrategy.TResult.cs",
+    "src/Polly.Core/ResilienceStrategyOptions.cs",
+    "docs/extensibility/proactive-strategy.md",
+    "docs/extensibility/reactive-strategy.md"
+  ]
+}

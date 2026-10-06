@@ -1,0 +1,20 @@
+{
+  "case": "case-004",
+  "files": [
+    "lib/phoenix/endpoint.ex",
+    "lib/phoenix/socket/transport.ex",
+    "lib/phoenix/transports/websocket.ex",
+    "lib/phoenix/transports/long_poll.ex"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "lib/phoenix/endpoint.ex:702-748 is socket_paths/4: it builds a `common_config` list of 9 shared keys (lines 705-716) and calls maybe_validate_keys/2 once with common_config ++ 10 websocket-only keys and once with common_config ++ 3 longpoll-only keys. That is the only key whitelist in the tree -- grepping any member, e.g. check_csrf, returns endpoint.ex:710 plus the enforcement sites in transport.ex (lines 477, 517) and the per-transport default_config at websocket.ex:29 and long_poll.ex:20. Human-readable duplicates of the same list live in the endpoint @moduledoc (lines 889-1060). Verified c",
+  "files_unleaked": [
+    "lib/phoenix/endpoint.ex",
+    "lib/phoenix/socket/transport.ex",
+    "lib/phoenix/transports/websocket.ex",
+    "lib/phoenix/transports/long_poll.ex"
+  ]
+}

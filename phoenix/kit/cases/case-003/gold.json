@@ -1,0 +1,25 @@
+{
+  "case": "case-003",
+  "files": [
+    "installer/lib/phx_new/generator.ex",
+    "installer/lib/phx_new/single.ex",
+    "installer/lib/phx_new/umbrella.ex",
+    "installer/lib/phx_new/web.ex",
+    "installer/lib/phx_new/ecto.ex",
+    "installer/lib/phx_new/mailer.ex",
+    "installer/lib/mix/tasks/phx.new.ex"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`git grep -ln 'use Phx.New.Generator' -- installer/lib` returns exactly five modules: single.ex, umbrella.ex, web.ex, ecto.ex, mailer.ex -- the only places a `template(name, mappings)` declaration can live. The mechanism is installer/lib/phx_new/generator.ex: __before_compile__ (line 22) walks @templates and, for each listed source, runs EEx.compile_file and emits one `def render(name, source, assigns)` clause (lines 33-53); template_files/1 (line 59) is `Keyword.fetch!(@templates, name)`; copy_from/3 (lines 69-95) iterates the same mapping to write files. A file that no template(...) names th",
+  "files_unleaked": [
+    "installer/lib/phx_new/generator.ex",
+    "installer/lib/phx_new/single.ex",
+    "installer/lib/phx_new/umbrella.ex",
+    "installer/lib/phx_new/web.ex",
+    "installer/lib/phx_new/ecto.ex",
+    "installer/lib/phx_new/mailer.ex"
+  ]
+}

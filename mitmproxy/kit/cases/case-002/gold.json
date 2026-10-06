@@ -1,0 +1,16 @@
+{
+  "case": "case-002",
+  "files": [
+    "mitmproxy/proxy/mode_specs.py",
+    "mitmproxy/proxy/mode_servers.py",
+    "mitmproxy/proxy/layers/modes.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Both registries are self-asserting, so the pairing is mechanical rather than conventional. mode_specs.py:68-71 sets type_name = class name with the 'Mode' suffix removed and lowercased, then asserts it is unique; mode_servers.py:100-107 extracts the mode class out of Generic[M].__orig_bases__ and asserts uniqueness; ServerInstance.make (:110-123) resolves only through that dict, so an unpaired mode raises KeyError. Enumerating `class *Mode(ProxyMode)` and `class *Instance(*ServerInstance[mode_specs.*Mode])` therefore yields the complete bijection. The orphan is OsProxyMode (mode_specs.py:326-3",
+  "files_unleaked": [
+    "mitmproxy/proxy/layers/modes.py"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "case": "case-005",
+  "files": [
+    "main.go",
+    "commands/commands.go",
+    "commands/commandeer.go",
+    "commands/mod.go",
+    "main_test.go",
+    "main_withdeploy_test.go",
+    "main_withdeploy_off_test.go",
+    "testscripts/commands",
+    "testscripts/server",
+    "testscripts/unfinished",
+    "testscripts/withdeploy",
+    "testscripts/withdeploy-off"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Entry point is forced: main.go:28 calls `commands.Execute(os.Args[1:])` and there is no other. The root list is commands/commands.go:23-41 `newExec()`, holding exactly 13 Commanders; nested subcommands appear only in a parent's `Commands()` method, e.g. commands/mod.go:321 and commands/mod.go:39-47 for the `npm` child \u2014 so `git grep -n 'Commands() \\[\\]simplecobra.Commander'` enumerates the whole tree with no leaves hidden. Global flags are all declared in commands/commandeer.go:563-612. For the tests: `git grep -n 'testscript.Run'` returns exactly five call sites \u2014 main_test.go:44 (p.Dir = tes",
+  "files_unleaked": [
+    "main.go",
+    "commands/commands.go",
+    "commands/commandeer.go",
+    "commands/mod.go",
+    "main_withdeploy_test.go",
+    "main_withdeploy_off_test.go",
+    "testscripts/commands",
+    "testscripts/server",
+    "testscripts/unfinished",
+    "testscripts/withdeploy",
+    "testscripts/withdeploy-off"
+  ]
+}

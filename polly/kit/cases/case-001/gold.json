@@ -1,0 +1,24 @@
+{
+  "case": "case-001",
+  "files": [
+    "src/Snippets/Docs/Retry.cs",
+    "docs/strategies/retry.md",
+    "mdsnippets.json",
+    "cake.cs",
+    ".config/dotnet-tools.json",
+    ".github/workflows/on-push-do-docs.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Derived by matching markers, not by reading prose. Every `<!-- snippet: NAME -->` in docs/strategies/retry.md (lines 18, 409, 450, 475, 514, 545, 576, 614, 631, 653, ...) has a `#region NAME` at the matching position in src/Snippets/Docs/Retry.cs (lines 18, 120, 155, 175, 207, 222, 244, 273, 287, 304, ...) \u2014 same names, same order, one-to-one. mdsnippets.json:3-6 names the tool's scope and sets Convention=InPlaceOverwrite (the markdown is the OUTPUT); the tool version is pinned at .config/dotnet-tools.json:47-53 (markdownsnippets.tool, command `mdsnippets`). Two gates prove the direction of th",
+  "files_unleaked": [
+    "src/Snippets/Docs/Retry.cs",
+    "docs/strategies/retry.md",
+    "mdsnippets.json",
+    "cake.cs",
+    ".config/dotnet-tools.json",
+    ".github/workflows/on-push-do-docs.yml"
+  ]
+}

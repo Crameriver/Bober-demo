@@ -1,0 +1,21 @@
+{
+  "case": "case-003",
+  "files": [
+    "mitmproxy/version.py",
+    "mitmproxy/io/compat.py",
+    "test/mitmproxy/io/test_compat.py",
+    "test/mitmproxy/data/dumpfile-19.mitm"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "the"
+  ],
+  "key_derivation": "`git log -G\"FLOW_FORMAT_VERSION\" -- mitmproxy/version.py` returns 18 commits; mitmproxy/io/compat.py appears in every one of the 8 most recent (358fca3e7, 5ec4bbf49, 6b7106614, 362c19056, 6d67a405a, 8e1adbc5d, 6d2b823a5, eb65bc748), so the pair is invariant across four years. Completeness is checkable arithmetically rather than historically: FLOW_FORMAT_VERSION is 21 and converters' highest key is `20: convert_20_21`, so the chain from (0,11) to 21 is unbroken; bump the constant without adding a converter and migrate_flow raises on the previous format, which test_compat.py::test_load exercises",
+  "files_unleaked": [
+    "mitmproxy/version.py",
+    "test/mitmproxy/io/test_compat.py",
+    "test/mitmproxy/data/dumpfile-19.mitm"
+  ]
+}

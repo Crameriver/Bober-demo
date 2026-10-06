@@ -1,0 +1,27 @@
+{
+  "case": "case-000",
+  "files": [
+    "markup/markup.go",
+    "markup/goldmark/convert.go",
+    "markup/asciidocext/convert.go",
+    "markup/rst/convert.go",
+    "markup/pandoc/convert.go",
+    "markup/org/convert.go",
+    "markup/blackfriday/anchors.go",
+    "media/config.go"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Two enumerations that match one-for-one. (1) markup/markup.go:70-84 contains exactly five `add(<pkg>.Provider, contentTypes.X.SubType, ...)` calls, inside `NewConverterProvider`, which is the only constructor of the converter set. (2) `git grep -n 'var Provider converter.ProviderProvider'` returns exactly five hits \u2014 markup/goldmark/convert.go:51, markup/asciidocext/convert.go:26, markup/rst/convert.go:33, markup/pandoc/convert.go:32, markup/org/convert.go:29 \u2014 one per package, all in a file literally named convert.go. The two sets are identical, so the list is complete and no sixth converter",
+  "files_unleaked": [
+    "markup/goldmark/convert.go",
+    "markup/asciidocext/convert.go",
+    "markup/rst/convert.go",
+    "markup/pandoc/convert.go",
+    "markup/org/convert.go",
+    "markup/blackfriday/anchors.go",
+    "media/config.go"
+  ]
+}

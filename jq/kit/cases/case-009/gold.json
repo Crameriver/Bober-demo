@@ -1,0 +1,24 @@
+{
+  "case": "case-009",
+  "files": [
+    "src/builtin.c",
+    "src/builtin.jq",
+    "tests/jq.test",
+    "docs/content/manual/dev/manual.yml",
+    "jq.1.prebuilt",
+    "tests/man.test",
+    "tests/manonig.test",
+    "Makefile.am"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "src/builtin.inc"
+  ],
+  "key_derivation": "Both routes come straight out of history, with the hand-edited/regenerated split proven by the build rules rather than by convention. jq route: 7d8c096, 1bebd23 and 0b5ae30 each touch exactly {src/builtin.jq, tests/jq.test, docs/content/manual/dev/manual.yml, jq.1.prebuilt, tests/man.test}. C route: c350566 touches exactly {src/builtin.c, tests/jq.test, docs dev manual, jq.1.prebuilt, tests/man.test}; 0e0cdd5 and be437ec are the same plus implementation files, and 0e0cdd5 also adds Makefile.am because it introduced tests/uri.test + tests/uritest. Regenerated-ness: Makefile.am:166 and :182 make",
+  "files_unleaked": [
+    "src/builtin.c",
+    "tests/manonig.test"
+  ]
+}

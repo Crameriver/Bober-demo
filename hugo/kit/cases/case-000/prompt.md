@@ -1,0 +1,1 @@
+Which markup converters does Hugo ship, where is each one implemented, and what is the single place they are registered? Name any directory under markup/ that looks like a converter but registers none.

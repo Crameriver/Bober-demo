@@ -1,0 +1,1 @@
+mitmproxy auto-registers every Hook subclass, so no list needs editing to create one. Name every file that reads the global registry mitmproxy.hooks.all_hooks, say which one turns a new undocumented hook into a red CI, and quote how it fails.

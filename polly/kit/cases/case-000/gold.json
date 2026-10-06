@@ -1,0 +1,21 @@
+{
+  "case": "case-000",
+  "files": [
+    "src/Polly.Core/.PublicAPI/PublicAPI.Unshipped.txt",
+    "eng/Library.targets",
+    "Directory.Packages.props",
+    "src/Polly.Core/.PublicAPI/PublicAPI.Shipped.txt",
+    "eng/update-baselines.ps1"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "The enforcing mechanism is a single wiring site, so the key is closed. eng/Library.targets:51-56 adds Microsoft.CodeAnalysis.PublicApiAnalyzers to every project where UsePublicApiAnalyzers != false; lines 57-71 add PublicAPI.Shipped.txt and PublicAPI.Unshipped.txt (plus optional per-TargetFrameworkIdentifier and per-TargetFramework variants) as AdditionalFiles when the .PublicAPI directory exists; the package version comes from Directory.Packages.props:12. An undeclared public member is therefore RS0016. `find src -name \"PublicAPI*.txt\"` returns exactly ten files in five directories, and `grep",
+  "files_unleaked": [
+    "src/Polly.Core/.PublicAPI/PublicAPI.Unshipped.txt",
+    "eng/Library.targets",
+    "src/Polly.Core/.PublicAPI/PublicAPI.Shipped.txt",
+    "eng/update-baselines.ps1"
+  ]
+}

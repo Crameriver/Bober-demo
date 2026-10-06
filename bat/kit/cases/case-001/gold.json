@@ -1,0 +1,32 @@
+{
+  "case": "case-001",
+  "files": [
+    "assets/completions/bat.bash.in",
+    "assets/completions/bat.fish.in",
+    "assets/completions/bat.zsh.in",
+    "assets/completions/_bat.ps1.in",
+    "assets/manual/bat.1.in",
+    "Cargo.toml",
+    "build/main.rs",
+    "build/application.rs",
+    "build/util.rs",
+    "src/bin/bat/completions.rs",
+    "src/bin/bat/main.rs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Followed the chain by symbol, each hop verified by reading the file: Cargo.toml:11 names build/main.rs as the build script; build/main.rs:1-2 and :13-14 gate `mod application` on the `application` feature and call `application::gen_man_and_comp()`; build/application.rs:7-8 declares rerun-if-changed on assets/manual/ and assets/completions/, then :40-64 calls `crate::util::render_template` five times (bat.1.in plus the four completion templates) into OUT_DIR; build/util.rs:6-20 is that renderer, substituting `{{PROJECT_NAME}}`-style variables defined at build/application.rs:21-28; build/applica",
+  "files_unleaked": [
+    "assets/completions/bat.bash.in",
+    "assets/completions/bat.fish.in",
+    "assets/completions/bat.zsh.in",
+    "assets/completions/_bat.ps1.in",
+    "assets/manual/bat.1.in",
+    "build/application.rs",
+    "build/util.rs",
+    "src/bin/bat/completions.rs",
+    "src/bin/bat/main.rs"
+  ]
+}

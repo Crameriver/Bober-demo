@@ -1,0 +1,34 @@
+{
+  "case": "case-007",
+  "files": [
+    "src/style.rs",
+    "src/decorations.rs",
+    "src/printer.rs",
+    "src/config.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "tests/snapshot_tests.rs",
+    "tests/tester/mod.rs",
+    "tests/snapshots/sample.rs",
+    "tests/snapshots/sample.modified.rs",
+    "tests/snapshots/output/"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "src/style.rs is the parser and resolver: `enum StyleComponent` at :8-21 (Auto, Changes, Grid, Rule, Header, HeaderFilename, HeaderFilesize, LineNumbers, Snip, Full, Default, Plain), `components()` at :25, `FromStr` at :68, `StyleComponents` at :89, and the +/- merge logic (`enum ComponentAction` Override/Add/Remove at :144-146, `extract_from_str` at :150, the fold at :199-205) added by b74c125c. src/config.rs carries the resolved StyleComponents (imported at src/config.rs:5). src/decorations.rs implements the three gutter decorations: LineNumberDecoration at :41, LineChangesDecoration at :111,",
+  "files_unleaked": [
+    "src/style.rs",
+    "src/decorations.rs",
+    "src/printer.rs",
+    "src/config.rs",
+    "src/bin/bat/clap_app.rs",
+    "src/bin/bat/app.rs",
+    "tests/snapshot_tests.rs",
+    "tests/tester/mod.rs",
+    "tests/snapshots/sample.rs",
+    "tests/snapshots/sample.modified.rs",
+    "tests/snapshots/output/"
+  ]
+}

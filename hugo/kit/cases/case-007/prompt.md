@@ -1,0 +1,1 @@
+Hugo's default output formats and its built-in media types are two separate registries. Enumerate the link between them: where is each registry declared, what binds a format to a type, and what happens at startup if the binding is incomplete?

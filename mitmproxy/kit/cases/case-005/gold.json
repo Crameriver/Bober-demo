@@ -1,0 +1,24 @@
+{
+  "case": "case-005",
+  "files": [
+    "mitmproxy/options.py",
+    "web/gen/options_js.py",
+    "web/src/js/ducks/_options_gen.ts",
+    "mitmproxy/tools/cmdline.py",
+    "docs/scripts/options.py"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [
+    "any"
+  ],
+  "key_derivation": "Read the generator rather than the history: web/gen/options_js.py:35-38 instantiates `master.WebMaster(options.Options())` and :44-56 prints only `opt.name`, `opt.typespec` and `opt.default` for each entry of m.options. So the exact rule is: _options_gen.ts is the set of option NAMES, TYPES and DEFAULTS visible to WebMaster, independent of where they were declared and independent of help text. That rule explains every single exception in the history - 7 commits touch options.py and the TS together, 13 touch only the TS (option declared inside an addon: de871df53, 6bb536e0f, 317f5b9dc, 2c180269",
+  "files_unleaked": [
+    "mitmproxy/options.py",
+    "web/gen/options_js.py",
+    "web/src/js/ducks/_options_gen.ts",
+    "mitmproxy/tools/cmdline.py",
+    "docs/scripts/options.py"
+  ]
+}

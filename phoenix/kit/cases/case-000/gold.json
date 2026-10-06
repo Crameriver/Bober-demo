@@ -1,0 +1,43 @@
+{
+  "case": "case-000",
+  "files": [
+    "test/mix/tasks/phx.gen.auth_test.exs",
+    "test/test_helper.exs",
+    "installer/test/phx_new_test.exs",
+    "installer/test/phx_new_ecto_test.exs",
+    "installer/test/phx_new_umbrella_test.exs",
+    "installer/test/phx_new_web_test.exs",
+    "assets/test/channel_test.js",
+    "assets/test/longpoll_test.js",
+    "assets/test/presence_test.js",
+    "assets/test/serializer_test.js",
+    "assets/test/socket_http_test.js",
+    "assets/test/socket_test.js",
+    "integration_test/test/test_helper.exs",
+    "integration_test/test/code_generation/",
+    "jest.config.js",
+    "package.json",
+    ".github/workflows/ci.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Four independent exclusions, each read off a committed file. (1) test/test_helper.exs:28 sets `excludes = [:mix_phx_new]`; `git grep -n 'mix_phx_new' test/` returns exactly one tagged module, test/mix/tasks/phx.gen.auth_test.exs:6 -- run with `mix test --only mix_phx_new` (.github/workflows/ci.yml:127). (2) The root project compiles only lib/ (mix.exs:60) and its test path is `test`, so installer/ and integration_test/ -- each a separate Mix project with its own mix.exs and mix.lock -- are unreachable; run with working-directory installer (ci.yml:119-121) and integration_test (ci.yml:324-328).",
+  "files_unleaked": [
+    "installer/test/phx_new_test.exs",
+    "installer/test/phx_new_ecto_test.exs",
+    "installer/test/phx_new_umbrella_test.exs",
+    "installer/test/phx_new_web_test.exs",
+    "assets/test/channel_test.js",
+    "assets/test/longpoll_test.js",
+    "assets/test/presence_test.js",
+    "assets/test/serializer_test.js",
+    "assets/test/socket_http_test.js",
+    "assets/test/socket_test.js",
+    "integration_test/test/code_generation/",
+    "jest.config.js",
+    "package.json",
+    ".github/workflows/ci.yml"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "case": "case-005",
+  "files": [
+    "src/LegacySupport/CallerArgumentExpressionAttribute.cs",
+    "src/LegacySupport/DynamicDependencyAttribute.cs",
+    "src/LegacySupport/DynamicallyAccessedMemberTypes.cs",
+    "src/LegacySupport/DynamicallyAccessedMembersAttribute.cs",
+    "src/LegacySupport/IsExternalInit.cs",
+    "src/LegacySupport/NullableAttributes.cs",
+    "src/LegacySupport/RequiresUnreferencedCodeAttribute.cs",
+    "src/LegacySupport/UnconditionalSuppressMessageAttribute.cs",
+    "eng/Common.props",
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "src/Shared/DebuggerDisableUserUnhandledExceptionsAttribute.cs"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "There is exactly one consumer of the switch, so both halves of the answer are closed. eng/Common.props:14-16 is the only place that reads $(LegacySupport): `<Compile Include=\"...src/LegacySupport/*.cs\" LinkBase=\"LegacySupport\" />` guarded by `'$(LegacySupport)' == 'true' AND !IsTargetFrameworkCompatible(netcoreapp3.1)`. The glob makes `ls src/LegacySupport` the complete file list (8 files). `grep -rn \"<LegacySupport>\"` returns exactly three opt-ins: Polly.Core.csproj:11, Polly.Extensions.csproj:10, Polly.RateLimiting.csproj:10 \u2014 src/Polly and src/Polly.Testing do NOT opt in, which contradicts",
+  "files_unleaked": [
+    "src/LegacySupport/CallerArgumentExpressionAttribute.cs",
+    "src/LegacySupport/DynamicDependencyAttribute.cs",
+    "src/LegacySupport/DynamicallyAccessedMemberTypes.cs",
+    "src/LegacySupport/DynamicallyAccessedMembersAttribute.cs",
+    "src/LegacySupport/IsExternalInit.cs",
+    "src/LegacySupport/NullableAttributes.cs",
+    "src/LegacySupport/RequiresUnreferencedCodeAttribute.cs",
+    "src/LegacySupport/UnconditionalSuppressMessageAttribute.cs",
+    "eng/Common.props",
+    "src/Polly.Core/Polly.Core.csproj",
+    "src/Polly.Extensions/Polly.Extensions.csproj",
+    "src/Polly.RateLimiting/Polly.RateLimiting.csproj",
+    "src/Shared/DebuggerDisableUserUnhandledExceptionsAttribute.cs"
+  ]
+}
