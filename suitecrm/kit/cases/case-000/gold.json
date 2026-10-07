@@ -1,0 +1,28 @@
+{
+  "case": "case-000",
+  "files": [
+    "include/MVC/Controller/action_file_map.php",
+    "include/MVC/Controller/action_view_map.php",
+    "include/MVC/Controller/file_access_control_map.php",
+    "include/MVC/Controller/entry_point_registry.php",
+    "include/MVC/Controller/SugarController.php",
+    "ModuleInstall/extensions.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "SugarController.php:320-356 loadMapping(): include/MVC/Controller/<var>.php -> modules/<Module>/<var>.php -> custom/modules/<Module>/<var>.php -> custom/include/MVC/Controller/<var>.php -> custom/application/Ext/<VarName>/<var>.ext.php -> custom/modules/<Module>/Ext/<VarName>/<var>.ext.php, then sugar_cache_put('CONTROLLER_'.$var.'_'.$this->module). The four stock maps are the non-class files in i",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "include/MVC/Controller/action_file_map.php",
+    "include/MVC/Controller/action_view_map.php",
+    "include/MVC/Controller/file_access_control_map.php",
+    "include/MVC/Controller/entry_point_registry.php",
+    "include/MVC/Controller/SugarController.php",
+    "ModuleInstall/extensions.php"
+  ],
+  "question_narrowed": "A smoke session and a rival-answer sweep found a second defensible answer to the original wording; the question was narrowed to identify which mechanism is asked about. The answer key was NOT changed.",
+  "rival_answer_excluded": "A literal reading of the question's own scoping sentence yields only the two stock maps that turn an action name into an include or a view (plus the remap that is loaded with them): include/MVC/Controller/action_file_map.php and include/MVC/Controller/action_view_map.php. The two other keyed stock files, file_access_control_map.php and entry_point_registry.php, are not reached by the action-name p"
+}

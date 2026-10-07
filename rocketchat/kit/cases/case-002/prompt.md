@@ -1,0 +1,1 @@
+Mongo-backed collections are reached through lazily-created proxies rather than direct imports, and a wiring mistake surfaces only when a query runs. Which files implement that indirection, which two files perform the registration (one for the monolith, one for microservice processes), and where does Enterprise register its own collections behind a license check?

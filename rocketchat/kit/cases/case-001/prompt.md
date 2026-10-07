@@ -1,0 +1,1 @@
+Two sibling directories whose names differ only by punctuation hold completely different kinds of integration test, run by different tools. Which config files drive each, which two support files does the mocha side load outside its spec globs, which script must run before the browser suite, and where are the conventions for the browser suite written down?

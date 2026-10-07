@@ -1,0 +1,30 @@
+{
+  "case": "case-005",
+  "files": [
+    "packages/ui-client/src/hooks/useFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/usePreferenceFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/useDefaultSettingFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/useFeaturePreview.ts",
+    "apps/meteor/client/hooks/useFeaturePreviewEnableQuery.ts",
+    "apps/meteor/client/views/account/featurePreview/AccountFeaturePreviewPage.tsx",
+    "apps/meteor/client/views/admin/featurePreview/AdminFeaturePreviewPage.tsx",
+    "apps/meteor/server/settings/accounts.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "grep -rn defaultFeaturesPreview: declared at packages/ui-client/src/hooks/useFeaturePreviewList.ts:21 with enabledDefaultFeatures derived at :49, and consumed by apps/meteor/client/views/account/sidebarItems.tsx:56 together with settings.peek('Accounts_AllowFeaturePreview'). usePreferenceFeaturePreviewList.ts merges the user preference; apps/meteor/client/hooks/useFeaturePreviewEnableQuery.ts grou",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "packages/ui-client/src/hooks/useFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/usePreferenceFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/useDefaultSettingFeaturePreviewList.ts",
+    "packages/ui-client/src/hooks/useFeaturePreview.ts",
+    "apps/meteor/client/hooks/useFeaturePreviewEnableQuery.ts",
+    "apps/meteor/client/views/account/featurePreview/AccountFeaturePreviewPage.tsx",
+    "apps/meteor/client/views/admin/featurePreview/AdminFeaturePreviewPage.tsx",
+    "apps/meteor/server/settings/accounts.ts"
+  ]
+}

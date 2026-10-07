@@ -1,0 +1,23 @@
+{
+  "case": "case-002",
+  "files": [
+    "quarkus/tests/integration/src/test/resources/org/keycloak/it/cli/dist/approvals/cli/help",
+    "quarkus/tests/integration/src/test/java/org/keycloak/it/cli/PackageSettings.java",
+    "quarkus/tests/integration/src/test/java/org/keycloak/it/cli/dist/HelpCommandDistTest.java",
+    ".gitattributes",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/configuration/mappers/PropertyMappers.java"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "HelpCommandDistTest.java:50-54 (@WithEnvVars KEYCLOAK_HELP_WIDTH 80, @DistributionTest, @RawDistOnly) drives @Launch cases through assertHelp(); :56 REPLACE_EXPECTED=\"KEYCLOAK_REPLACE_EXPECTED\"; :228-245 catches the mismatch and, when that env var is \"true\", writes the output to Approvals.createApprovalNamer().getApprovedFile(\".txt\"). `find quarkus/tests -name '*.approved.txt'` lists 22 files in .",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "quarkus/tests/integration/src/test/java/org/keycloak/it/cli/PackageSettings.java",
+    "quarkus/tests/integration/src/test/java/org/keycloak/it/cli/dist/HelpCommandDistTest.java",
+    ".gitattributes",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/configuration/mappers/PropertyMappers.java"
+  ]
+}

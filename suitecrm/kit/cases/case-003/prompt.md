@@ -1,0 +1,1 @@
+The Elasticsearch indexer in this product can turn a record into a document in two different ways, and each way is steered by a non-PHP data file that sits beside its class. Name both shapers, both data files, the loader they share, the adapter that fits one of them to the indexer's interface, and the command option that selects between them.

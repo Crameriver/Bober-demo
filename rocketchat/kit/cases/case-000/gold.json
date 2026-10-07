@@ -1,0 +1,28 @@
+{
+  "case": "case-000",
+  "files": [
+    "packages/patch-injection/src/makeFunction.ts",
+    "packages/patch-injection/src/midleware.ts",
+    "packages/patch-injection/src/index.ts",
+    "apps/meteor/ee/server/patches/index.ts",
+    "apps/meteor/ee/server/patches/fetchContactHistory.ts",
+    "apps/meteor/server/lib/omnichannel/contacts/getContactHistory.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "packages/patch-injection/src/makeFunction.ts wraps a function with withMiddleware and attaches .patch(fn, condition); withMiddleware lives in src/midleware.ts (one 'd'), and src/index.ts re-exports both. apps/meteor/ee/server/patches/index.ts imports exactly six files: closeBusinessHour, getInstanceList, verifyContactChannel, mergeContacts, isAgentAvailableToTakeContactInquiry, airGappedRestrictio",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "packages/patch-injection/src/makeFunction.ts",
+    "packages/patch-injection/src/midleware.ts",
+    "packages/patch-injection/src/index.ts",
+    "apps/meteor/ee/server/patches/index.ts",
+    "apps/meteor/ee/server/patches/fetchContactHistory.ts",
+    "apps/meteor/server/lib/omnichannel/contacts/getContactHistory.ts"
+  ],
+  "question_narrowed": "A smoke session and a rival-answer sweep found a second defensible answer to the original wording; the question was narrowed to identify which mechanism is asked about. The answer key was NOT changed.",
+  "rival_answer_excluded": "The licence package's prototype-rewriting override primitive: `overwriteClassOnLicense`, declared abstract on the LicenseManager and installed on the concrete implementation, plus the licence-gated `apps/meteor/ee/server/configuration/*` tree that runs enterprise behaviour behind `License.onLicense`. Files a competent engineer gives instead: ee/packages/license/src/events/overwriteClassOnLicense.t"
+}

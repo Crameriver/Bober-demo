@@ -1,0 +1,1 @@
+Server coverage is not collected by the unit runners — it is injected into the production build and written out when the process exits. Which Meteor package does the writing, which CI action flips the build into that mode, which two transpiler configs are involved, and where is the upload target configured?

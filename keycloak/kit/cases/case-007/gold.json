@@ -1,0 +1,32 @@
+{
+  "case": "case-007",
+  "files": [
+    ".github/actions/conditional/conditions",
+    ".github/actions/conditional/conditional.sh",
+    ".github/actions/conditional/action.yml",
+    ".github/workflows/ci.yml",
+    ".github/workflows/js-ci.yml",
+    ".github/workflows/operator-ci.yml",
+    ".github/workflows/codeql-analysis.yml",
+    ".github/workflows/documentation.yml",
+    ".github/workflows/guides.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": ".github/actions/conditional/conditional.sh:6 sets CONDITIONS_FILE=\".github/actions/conditional/conditions\", :35 reads it stripping comments, :41-63 converts each pattern (escape '.', '*'->'.*', trailing '/'->'/.*', bare names get '(.*/)?' prefix) and greps the PR's changed-file list, :83-95 writes `$JOB=true|false` to $GITHUB_OUTPUT. action.yml:1-57 declares the 18 outputs (ci, ci-quarkus, ci-stor",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    ".github/actions/conditional/conditions",
+    ".github/actions/conditional/conditional.sh",
+    ".github/actions/conditional/action.yml",
+    ".github/workflows/ci.yml",
+    ".github/workflows/js-ci.yml",
+    ".github/workflows/operator-ci.yml",
+    ".github/workflows/codeql-analysis.yml",
+    ".github/workflows/documentation.yml",
+    ".github/workflows/guides.yml"
+  ]
+}

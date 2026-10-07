@@ -1,0 +1,26 @@
+{
+  "case": "case-002",
+  "files": [
+    "packages/models/src/proxify.ts",
+    "packages/models/src/index.ts",
+    "packages/models/src/modelClasses.ts",
+    "packages/model-typings/src/index.ts",
+    "apps/meteor/server/models.ts",
+    "apps/meteor/ee/server/models/startup.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "packages/models/src/proxify.ts builds a Proxy per string namespace over lazyModels/models maps and throws `Model ${namespace} not found` in its get handler. packages/models/src/index.ts exports one proxify<IXModel>('IXModel') const per collection and defines registerServiceModels(db, trash) with registerModel('IUsersModel', ...) etc. modelClasses.ts re-exports every class from ./models/*. apps/met",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "packages/models/src/proxify.ts",
+    "packages/models/src/index.ts",
+    "packages/models/src/modelClasses.ts",
+    "packages/model-typings/src/index.ts",
+    "apps/meteor/server/models.ts",
+    "apps/meteor/ee/server/models/startup.ts"
+  ]
+}

@@ -1,0 +1,1 @@
+Which CI workflows and which jobs inside them run for a given pull request is decided by a path-pattern table rather than by the workflow files themselves. Where is that table, what code turns its glob-ish patterns into regular expressions and exports the resulting flags, and which workflow files consume those flags?

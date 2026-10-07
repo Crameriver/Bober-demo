@@ -1,0 +1,1 @@
+There is a scaffolding command for adding a database migration, and it edits two files, not one. Which script is it, what template does it render, which list does it splice the new import into, where is the function the template calls defined, and which two files in that folder are not numbered migrations at all?

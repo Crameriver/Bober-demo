@@ -1,0 +1,24 @@
+{
+  "case": "case-006",
+  "files": [
+    "tests/base/check-base-suites.sh",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base1TestSuite.java",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base2TestSuite.java",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base3TestSuite.java",
+    ".github/workflows/ci.yml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "tests/base/check-base-suites.sh:7-12 iterates `ls src/test/java/org/keycloak/tests/` minus 'suites' and 'utils' and greps `src/test/java/org/keycloak/tests/suites/Base*TestSuite.java`, printing \"Package '$i' not defined in any base testsuites\" and setting RESULT=1. Only Base1/2/3TestSuite.java match that glob (ls of the suites package). .github/workflows/ci.yml:117-118 runs it as the 'Check base t",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "tests/base/check-base-suites.sh",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base1TestSuite.java",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base2TestSuite.java",
+    "tests/base/src/test/java/org/keycloak/tests/suites/Base3TestSuite.java",
+    ".github/workflows/ci.yml"
+  ]
+}

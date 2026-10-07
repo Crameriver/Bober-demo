@@ -1,0 +1,30 @@
+{
+  "case": "case-003",
+  "files": [
+    "test-framework/core/src/main/java/org/keycloak/testframework/TestFrameworkExtension.java",
+    "test-framework/docs/EXTENSIONS.md",
+    "test-framework/db-edb/src/main/resources/META-INF/services/org.keycloak.testframework.TestFrameworkExtension",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbTestFrameworkExtension.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbDatabaseSupplier.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbTestDatabase.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/KeycloakEnterpriseDbContainer.java",
+    "quarkus/config-api/src/main/java/org/keycloak/config/database/Database.java"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "test-framework/docs/EXTENSIONS.md:17-30 says to implement org.keycloak.testframework.TestFrameworkExtension and register it in META-INF/services/org.keycloak.testframework.TestFrameworkExtension, and :22-24 explains valueTypeAliases turning KeycloakServer into KC_TEST_SERVER. `find . -name TestFrameworkExtension.java` -> test-framework/core/src/main/java/org/keycloak/testframework/TestFrameworkExt",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "test-framework/core/src/main/java/org/keycloak/testframework/TestFrameworkExtension.java",
+    "test-framework/docs/EXTENSIONS.md",
+    "test-framework/db-edb/src/main/resources/META-INF/services/org.keycloak.testframework.TestFrameworkExtension",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbTestFrameworkExtension.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbDatabaseSupplier.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/EnterpriseDbTestDatabase.java",
+    "test-framework/db-edb/src/main/java/org/keycloak/testframework/database/KeycloakEnterpriseDbContainer.java",
+    "quarkus/config-api/src/main/java/org/keycloak/config/database/Database.java"
+  ]
+}

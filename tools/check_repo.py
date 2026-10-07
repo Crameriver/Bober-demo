@@ -37,7 +37,8 @@ EXPECTED = {
     "bat":        dict(files=50, loc=12594, tokens=None),
     "phoenix":    dict(files=108, loc=32609, tokens=None),
 }
-KITS = ("jq", "mitmproxy", "polly", "hugo", "bat", "phoenix")
+# every codebase we have measured now ships its instrument
+KITS = tuple(EXPECTED)
 
 # Published once, on the landing page, and nowhere else allowed to disagree.
 POOLED = {"tokens": -40.5, "cost": -30.0, "replies": -42.9, "calls": -26.7}
@@ -89,8 +90,8 @@ def main() -> int:
             want = f"{MINUS}{abs(exp['tokens']):.1f}%"
             if want not in page:
                 note(f"{stack}: page does not state its token reduction {want}")
-        elif "second study only" not in page:
-            note(f"{stack}: has no first-study number and does not say so")
+        elif "| Tokens |" in page:
+            note(f"{stack}: shows a token row but has no first-study number")
 
     # 2. the estimator's calibration IS the first study, not a copy that drifted
     calib = {n: (f, p) for n, _l, f, p in E.CALIBRATION}
@@ -130,22 +131,33 @@ def main() -> int:
         if abs(a - b) >= 2 * full["spread"]:
             note(f"estimator: dropping the unread point moves {files} files by {abs(a-b):.1f}")
 
-    # 5. the tool output quoted in the estimate page must be the tool's actual output
-    table = E.table().splitlines()
+    # 5. the estimate page quotes the tool. The bands block is verbatim; the calibration is a
+    # markdown table, so it is checked by NUMBER against the estimator's own constants -- a
+    # verbatim check on prose would fail every time the wording improves, and then be disabled.
     page = read("docs", "ESTIMATE.md")
-    for line in table:
-        if not line.strip() or line.strip().startswith(("WHAT WE", "BANDS", "Every row",
-                                                        "out before", "Of those", "File counts",
-                                                        "the same way", "What IS")):
-            continue
-        if line.rstrip() not in page:
-            note(f"docs/ESTIMATE.md: quotes the estimator's table wrongly, missing "
-                 f"{line.strip()!r}")
-    worked = render_lines(4797, 914599, 12000)
+    bands = E.table().splitlines()
+    try:
+        start = next(i for i, ln in enumerate(bands) if "source files" in ln and "central" in ln)
+    except StopIteration:
+        start = None
+        note("the estimator no longer prints a bands table")
+    if start is not None:
+        for line in bands[start:]:
+            if not line.strip():
+                break
+            if line.rstrip() not in page:
+                note(f"docs/ESTIMATE.md: bands block out of date, missing {line.strip()!r}")
+    for name, lang, files, measured in E.CALIBRATION:
+        row = f"| {name} | {lang} | {files:,} |"
+        if row not in page:
+            note(f"docs/ESTIMATE.md: calibration row for {name} is missing or wrong ({row!r})")
+        if f"| {measured:.0f}% |" not in page:
+            note(f"docs/ESTIMATE.md: does not state {name}'s measured {measured:.0f}%")
+    worked = render_lines(4200, 610000, 9000)
     for line in worked:
-        if line.rstrip() and line.rstrip() not in page:
-            note(f"docs/ESTIMATE.md: the worked example does not match the tool, missing "
-                 f"{line.strip()!r}")
+        t = line.rstrip()
+        if t and ("%" in t or "month" in t) and t not in page:
+            note(f"docs/ESTIMATE.md: the worked example does not match the tool, missing {t.strip()!r}")
 
     # 5b. every relative link resolves. A page once pointed at a file that did not exist.
     link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")

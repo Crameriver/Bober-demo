@@ -1,0 +1,32 @@
+{
+  "case": "case-003",
+  "files": [
+    "apps/meteor/ee/server/api/mcp/index.ts",
+    "apps/meteor/ee/server/api/mcp/server.ts",
+    "apps/meteor/ee/server/api/mcp/catalog.ts",
+    "apps/meteor/ee/server/api/mcp/transport.ts",
+    "apps/meteor/ee/server/api/mcp/dispatch.ts",
+    "apps/meteor/ee/server/startup/mcp.ts",
+    "apps/meteor/server/api/v1/middlewares/cors.ts",
+    "apps/meteor/server/settings/ai.ts",
+    "docs/features/mcp-server.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "ls apps/meteor/ee/server/api/mcp -> index.ts, catalog.ts, dispatch.ts, server.ts, transport.ts each with a .spec.ts; ee/server/api/index.ts ends with `import './mcp';`. grep -rln MCP_Enabled returns ee/server/api/mcp/index.ts (+spec), server/api/v1/middlewares/cors.ts (+spec) and server/settings/ai.ts \u2014 i.e. the setting is declared in the AI settings file and the CORS middleware advertises MCP-Pro",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/ee/server/api/mcp/index.ts",
+    "apps/meteor/ee/server/api/mcp/server.ts",
+    "apps/meteor/ee/server/api/mcp/catalog.ts",
+    "apps/meteor/ee/server/api/mcp/transport.ts",
+    "apps/meteor/ee/server/api/mcp/dispatch.ts",
+    "apps/meteor/ee/server/startup/mcp.ts",
+    "apps/meteor/server/api/v1/middlewares/cors.ts",
+    "apps/meteor/server/settings/ai.ts",
+    "docs/features/mcp-server.md"
+  ]
+}

@@ -1,0 +1,1 @@
+Translation files are machine-maintained: a lint task rewrites every non-base locale. Which scripts implement the check/fix tasks and the interpolation normalisation they share, which one emits the shipped bundles, and which checked-in type file is a placeholder whose real content is produced at build time?

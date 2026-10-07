@@ -1,0 +1,28 @@
+{
+  "case": "case-009",
+  "files": [
+    "packages/i18n/src/scripts/check.mts",
+    "packages/i18n/src/scripts/common.mts",
+    "packages/i18n/src/scripts/normalize.mts",
+    "packages/i18n/src/scripts/normalize.spec.ts",
+    "packages/i18n/src/scripts/build.mts",
+    "packages/i18n/src/resources.ts",
+    "docs/i18n.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "packages/i18n/package.json: check/lint/lint:fix run `node --experimental-transform-types ./src/scripts/check.mts`, build runs tsc then ./src/scripts/build.mts. check.mts has a describeTask harness with lint/fix generators and imports readResource/writeResource/getLanguagePlurals from ./common.mts; build.mts imports normalizeI18nInterpolations from ./normalize.mts and writes dist/resources/*.i18n.j",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "packages/i18n/src/scripts/check.mts",
+    "packages/i18n/src/scripts/common.mts",
+    "packages/i18n/src/scripts/normalize.mts",
+    "packages/i18n/src/scripts/normalize.spec.ts",
+    "packages/i18n/src/scripts/build.mts",
+    "packages/i18n/src/resources.ts",
+    "docs/i18n.md"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "case": "case-008",
+  "files": [
+    "apps/meteor/server/settings/definitions.ts",
+    "apps/meteor/server/settings/SettingsRegistry.ts",
+    "apps/meteor/server/settings/index.ts",
+    "apps/meteor/server/settings/README.md",
+    "packages/core-typings/src/ISetting.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "apps/meteor/server/main.ts imports './settings/definitions' before anything else (with a comment about its top-level await). definitions.ts imports ~37 createXSettings functions from the sibling per-domain files and awaits them in two phases. settings/index.ts constructs `new SettingsRegistry({ store: settings, model: Settings })`, wraps add/addGroup with middleware and awaits initializeSettings \u2014",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/server/settings/definitions.ts",
+    "apps/meteor/server/settings/SettingsRegistry.ts",
+    "apps/meteor/server/settings/index.ts",
+    "apps/meteor/server/settings/README.md",
+    "packages/core-typings/src/ISetting.ts"
+  ]
+}

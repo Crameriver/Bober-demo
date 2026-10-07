@@ -1,0 +1,20 @@
+{
+  "case": "case-006",
+  "files": [
+    "modules/Schedulers/_AddJobsHere.php",
+    "modules/Schedulers/Scheduler.php",
+    "modules/Schedulers/language/en_us.lang.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "_AddJobsHere.php:69 $job_strings = array(0 => 'refreshJobs', ... 18 => 'runElasticSearchIndexerScheduler'), with the header comment at :55-63 spelling out the function contract. Scheduler.php:1062-1074 getJobsList() includes that file and builds the dropdown as $mod_strings['LBL_'.strtoupper($v)] ?? $label. modules/Schedulers/language/en_us.lang.php:150 'LBL_PRUNEDATABASE' etc. \u2014 I checked eight j",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "modules/Schedulers/_AddJobsHere.php",
+    "modules/Schedulers/Scheduler.php",
+    "modules/Schedulers/language/en_us.lang.php"
+  ]
+}

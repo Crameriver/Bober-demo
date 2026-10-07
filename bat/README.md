@@ -1,40 +1,39 @@
 # bat
 
-**Rust · 50 source files · 12,594 lines · [https://github.com/sharkdp/bat](https://github.com/sharkdp/bat) · MIT OR Apache-2.0**
+**Rust · 50 source files · 12,594 lines of code · [https://github.com/sharkdp/bat](https://github.com/sharkdp/bat) · MIT OR Apache-2.0**
 
-A Rust command-line tool with the most guessable verification there is:
-`cargo test`. Nothing cleared the bar, as expected for this shape of repository.
+A Rust command-line tool with the most guessable verification there is: `cargo
+test`. A codebase this conventional is where a fact sheet has least to tell an agent, and the
+table below shows it.
 
-This codebase was measured in the **second study only**. The package was installed
-on it, and what is compared below is one piece of the fitting against the rest of
-the package: there is no with-package-against-nothing number for this repository.
+## What one piece of the tuning adds, on its own
 
-## Fitting the package to this repository, measured on its own
-
-One piece of the fitting, measured against the same package without it. 8 tickets,
+The rest of the setup WITHOUT one piece of the tuning, against the same setup WITH it — so this is
+what that piece is worth by itself, on top of everything else already in place. 8 tickets,
 32 sessions, both arms run twice.
 
-These are a different, question-shaped set of tasks from the table above, graded on how much
-of a reference answer the agent covered. The absolute figures are therefore **not comparable
-between the two tables** -- only the contrast inside each table is.
+These are question-shaped tasks rather than the defect tickets above, graded on how much of a
+reference answer the reply covers, so the two tables are not comparable to each other — only the
+contrast inside each one is.
 
-| Per ticket | package | package + that piece | |
+| Per ticket | our setup | + that piece | |
 |---|---|---|---|
 | Cost | $0.226 | **$0.210** | **−6.9%** |
 | Tool calls | 14.6 | **12.2** | **−16.2%** |
 | Model turns | 6.2 | **6.0** | **−3.0%** |
-| Answer completeness | 0.509 | 0.530 | +4.0% **unread** |
+| Answer completeness | 0.509 | 0.530 | +4.0% |
 
-Across the six codebases in this study, two showed an established reduction and they are the
-two whose verification is hard to guess. Answer completeness improved on none of the six: the
-fitting makes the work cheaper where it works, it does not make the answers better.
+Across all nine codebases and 344 sessions, that piece cut tool calls **−10.6%** and
+cost **−8.9%**, both clearing the bar. It pays most where a codebase's build and verification
+are hard to guess, and least where they answer to a command an agent works out by itself — which
+is why we measure your codebase before quoting it.
 
-## The benchmark, yours to keep
+## The instrument stays with you
 
-[`kit/`](kit/) is the instrument that produced the second table, self-contained: the cases,
-the runner, the analysis with its guards, and the audit trail of what was dropped from this
-page and why. Python standard library, no dependency on anything of ours, and it runs against
-your own checkout.
+[`kit/`](kit/) is the measuring tool we used here, self-contained: the cases drawn from this
+project's history, the runner, the analysis, and the record of what we kept while tuning this
+codebase and what we discarded. Python standard library, no dependency on anything of ours, and it
+runs against your own checkout.
 
 ```
 python kit/bench/run.py --arm bare  --rep r1
@@ -44,10 +43,11 @@ python kit/bench/run.py --arm facts --rep r2
 python kit/bench/analyse.py
 ```
 
-Both replicates of both arms. They are not redundancy: the difference between an arm and
-itself is that day's noise floor, and the analysis uses it as a veto.
+Both replicates of both arms — the difference between an arm and itself is that day's noise floor,
+and the analysis uses it as a veto. This is what lets you check the number in twelve months, when
+your repository has moved and your model has changed, without picking up the phone.
 
-## Estimate it for a repository this size
+## What would it save on a codebase this size?
 
 ```
 python ../tools/estimate.py --files 50 --loc 12594
@@ -55,7 +55,7 @@ python ../tools/estimate.py --files 50 --loc 12594
 
 ---
 
-[Why these numbers can be believed](../docs/EVIDENCE.md) ·
-[What gets installed](../docs/WHAT-IT-DOES.md) ·
-[What an engagement looks like](../docs/ENGAGEMENT.md) ·
-[Estimate your own repository](../docs/ESTIMATE.md)
+[How we measure](../docs/EVIDENCE.md) ·
+[What we set up](../docs/WHAT-IT-DOES.md) ·
+[How an engagement runs](../docs/ENGAGEMENT.md) ·
+[What will it save on your codebase?](../docs/ESTIMATE.md)

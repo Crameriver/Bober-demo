@@ -1,0 +1,1 @@
+Admin settings are declared in code and only then persisted. Which file aggregates the per-domain declaration modules, which class implements the registry whose group/section/add calls they make, which file is the barrel the rest of the server imports, where are the option types and value kinds documented, and where is the record type declared?

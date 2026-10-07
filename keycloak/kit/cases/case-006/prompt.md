@@ -1,0 +1,1 @@
+The very first job of the main CI workflow runs a shell guard that fails the build when a directory of new-framework base tests is not reachable from any aggregate entry point. Where is that guard implemented, which classes hold the lists it greps through, and where in CI is it invoked?

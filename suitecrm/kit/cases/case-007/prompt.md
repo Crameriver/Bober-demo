@@ -1,0 +1,1 @@
+Before the Slim-based interface, this product exposed a versioned SOAP and REST API. For its newest version, which file registers the callable method names and the SOAP type definitions, which file implements them, which two files are the HTTP entry points, and which shared file wires those pieces together?

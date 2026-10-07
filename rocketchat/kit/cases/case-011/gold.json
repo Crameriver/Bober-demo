@@ -1,0 +1,26 @@
+{
+  "case": "case-011",
+  "files": [
+    "apps/meteor/.scripts/make-migration.ts",
+    "apps/meteor/.scripts/migration.template",
+    "apps/meteor/server/startup/migrations/index.ts",
+    "apps/meteor/server/lib/migrations.ts",
+    "apps/meteor/server/startup/migrations/xrun.ts",
+    "apps/meteor/server/startup/migrations/minimumVersion.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "apps/meteor/package.json 'migration:add' runs ts-node .scripts/make-migration.ts. That file refuses a duplicate vNNN, renders ./.scripts/migration.template into ./server/startup/migrations/vNNN.ts, then splices `import './vNNN';` into ./server/startup/migrations/index.ts at length-2 (just above the trailing xrun re-export). migration.template imports addMigration from '../../lib/migrations' (apps/",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/.scripts/make-migration.ts",
+    "apps/meteor/.scripts/migration.template",
+    "apps/meteor/server/startup/migrations/index.ts",
+    "apps/meteor/server/lib/migrations.ts",
+    "apps/meteor/server/startup/migrations/xrun.ts",
+    "apps/meteor/server/startup/migrations/minimumVersion.ts"
+  ]
+}

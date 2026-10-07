@@ -1,0 +1,24 @@
+{
+  "case": "case-011",
+  "files": [
+    "services/src/main/java/org/keycloak/theme/DefaultThemeSelectorProvider.java",
+    "server-spi/src/main/java/org/keycloak/theme/ThemeSelectorProvider.java",
+    "common/src/main/java/org/keycloak/common/Profile.java",
+    "themes/src/main/resources/theme/keycloak/login/theme.properties",
+    "themes/src/main/resources/theme/keycloak.v2/login/theme.properties"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "ThemeSelectorProvider.java:30-32 defines DEFAULT=\"keycloak\", DEFAULT_V2=\"keycloak.v2\", DEFAULT_V3=\"keycloak.v3\"; :43-58 getDefaultThemeName returns DEFAULT_V2 for Theme.Type.LOGIN when Profile.Feature.LOGIN_V2 is enabled, else DEFAULT. Profile.java:78 declares LOGIN_V2(\"New Login Theme\", Type.DEFAULT, 2, FeatureUpdatePolicy.ROLLING_NO_UPGRADE) - i.e. on by default. Both login theme.properties file",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "services/src/main/java/org/keycloak/theme/DefaultThemeSelectorProvider.java",
+    "server-spi/src/main/java/org/keycloak/theme/ThemeSelectorProvider.java",
+    "common/src/main/java/org/keycloak/common/Profile.java",
+    "themes/src/main/resources/theme/keycloak/login/theme.properties",
+    "themes/src/main/resources/theme/keycloak.v2/login/theme.properties"
+  ]
+}

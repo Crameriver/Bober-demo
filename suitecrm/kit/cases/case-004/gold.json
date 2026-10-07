@@ -1,0 +1,28 @@
+{
+  "case": "case-004",
+  "files": [
+    "jssource/JSGroupings.php",
+    "jssource/minify_utils.php",
+    "jssource/SugarMin.php",
+    "include/MVC/View/SugarView.php",
+    "include/utils/sugar_file_utils.php",
+    "include/SugarTheme/SugarTheme.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "JSGroupings.php:52 defines $js_groupings mapping each root js path to one of 12 group targets (include/javascript/sugar_grp1.js, sugar_grp1_jquery.js, ...). minify_utils.php:88 ConcatenateFiles() requires JSGroupings.php and at :120 does `$trgt = sugar_cached($trgt)`, so the output lands under cache/. SugarView.php:989-997 (and :853-857) test `is_file(sugar_cached(\"include/javascript/sugar_grp1.js",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "jssource/JSGroupings.php",
+    "jssource/minify_utils.php",
+    "jssource/SugarMin.php",
+    "include/MVC/View/SugarView.php",
+    "include/utils/sugar_file_utils.php",
+    "include/SugarTheme/SugarTheme.php"
+  ],
+  "question_narrowed": "A smoke session and a rival-answer sweep found a second defensible answer to the original wording; the question was narrowed to identify which mechanism is asked about. The answer key was NOT changed.",
+  "rival_answer_excluded": "jssource/minify.php \u2014 reachable as an authenticated HTTP entry point and driven from the browser by modules/Administration/callJSRepair.php, it compares the source files' mtimes against the merged bundles at request time and calls ConcatenateFiles() when they are stale. Neither file is in the key, so an agent that answers the \"decides at request time\" slot with it scores zero on that slot."
+}

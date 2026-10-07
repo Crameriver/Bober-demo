@@ -1,0 +1,26 @@
+{
+  "case": "case-001",
+  "files": [
+    "apps/meteor/.mocharc.api.js",
+    "apps/meteor/playwright.config.ts",
+    "apps/meteor/playwright.prepare.mjs",
+    "apps/meteor/tests/e2e/README.md",
+    "apps/meteor/tests/end-to-end/reporter.ts",
+    "apps/meteor/tests/end-to-end/teardown.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "cat apps/meteor/.mocharc.api.js: timeout 10000, `file: 'tests/end-to-end/teardown.ts'`, `reporter: 'tests/end-to-end/reporter.ts'`, spec globs tests/end-to-end/api/*, .../helpers, .../methods, tests/end-to-end/apps/*. apps/meteor/package.json: 'test:e2e': 'playwright test' and 'prepare': 'node playwright.prepare.mjs'; .github/workflows/ci-test-e2e.yml:308-309 runs `yarn prepare` then `yarn test:e2",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/.mocharc.api.js",
+    "apps/meteor/playwright.config.ts",
+    "apps/meteor/playwright.prepare.mjs",
+    "apps/meteor/tests/e2e/README.md",
+    "apps/meteor/tests/end-to-end/reporter.ts",
+    "apps/meteor/tests/end-to-end/teardown.ts"
+  ]
+}

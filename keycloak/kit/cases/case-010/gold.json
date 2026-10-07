@@ -1,0 +1,32 @@
+{
+  "case": "case-010",
+  "files": [
+    "model/jpa/src/main/antlr4/org/keycloak/models/workflow/expression/BooleanConditionParser.g4",
+    "model/jpa/src/main/antlr4/org/keycloak/models/workflow/expression/BooleanConditionLexer.g4",
+    "scim/core/src/main/antlr4/org/keycloak/scim/filter/ScimFilterParser.g4",
+    "scim/core/src/main/antlr4/org/keycloak/scim/filter/ScimFilterLexer.g4",
+    "model/jpa/pom.xml",
+    "scim/core/pom.xml",
+    "model/jpa/src/main/java/org/keycloak/models/workflow/expression/EvaluatorUtils.java",
+    "scim/core/src/main/java/org/keycloak/scim/filter/FilterUtils.java",
+    "scim/model/src/main/java/org/keycloak/scim/model/filter/ScimJPAPredicateEvaluator.java"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`find . -name '*.g4'` returns exactly those four grammars. model/jpa/pom.xml:150-158 declares antlr4-maven-plugin with the `antlr4` goal and :175 adds ${project.build.directory}/generated-sources/antlr4 via build-helper; `grep -rln antlr4-maven-plugin --include=pom.xml` -> model/jpa/pom.xml, scim/core/pom.xml, pom.xml. Consumers: model/jpa/.../expression/AbstractBooleanEvaluator.java:3 extends Boo",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "model/jpa/src/main/antlr4/org/keycloak/models/workflow/expression/BooleanConditionParser.g4",
+    "model/jpa/src/main/antlr4/org/keycloak/models/workflow/expression/BooleanConditionLexer.g4",
+    "scim/core/src/main/antlr4/org/keycloak/scim/filter/ScimFilterParser.g4",
+    "scim/core/src/main/antlr4/org/keycloak/scim/filter/ScimFilterLexer.g4",
+    "model/jpa/pom.xml",
+    "scim/core/pom.xml",
+    "model/jpa/src/main/java/org/keycloak/models/workflow/expression/EvaluatorUtils.java",
+    "scim/core/src/main/java/org/keycloak/scim/filter/FilterUtils.java",
+    "scim/model/src/main/java/org/keycloak/scim/model/filter/ScimJPAPredicateEvaluator.java"
+  ]
+}

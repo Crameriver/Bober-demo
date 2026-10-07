@@ -1,0 +1,1 @@
+The REST surface has a second, deliberately unstable lane whose endpoints carry no semver promise and announce themselves to callers with a response header. Which files create that lane, register its endpoints and stamp the header, where is its typed client surface both declared and kept out of the stable endpoint union, and which spec asserts the header behaviour?

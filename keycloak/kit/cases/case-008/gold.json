@@ -1,0 +1,24 @@
+{
+  "case": "case-008",
+  "files": [
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/util/JpaUtils.java",
+    "quarkus/deployment/src/main/java/org/keycloak/quarkus/deployment/KeycloakProcessor.java",
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/entityprovider/JpaEntityProvider.java",
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/updater/liquibase/LiquibaseJpaUpdaterProvider.java",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/database/liquibase/QuarkusJpaUpdaterProvider.java"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`grep -rn default-persistence.xml --include=*.java --include=*.xml .` returns exactly two readers: model/jpa/.../connections/jpa/util/JpaUtils.java:78-82 (ParsedPersistenceXmlDescriptor from the classloader resource, throwing \"Cannot find the file 'default-persistence.xml'\") and quarkus/deployment/.../KeycloakProcessor.java:545-549 (same resource via parser.getClassLoaderService().locateResource,",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/util/JpaUtils.java",
+    "quarkus/deployment/src/main/java/org/keycloak/quarkus/deployment/KeycloakProcessor.java",
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/entityprovider/JpaEntityProvider.java",
+    "model/jpa/src/main/java/org/keycloak/connections/jpa/updater/liquibase/LiquibaseJpaUpdaterProvider.java",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/storage/database/liquibase/QuarkusJpaUpdaterProvider.java"
+  ]
+}

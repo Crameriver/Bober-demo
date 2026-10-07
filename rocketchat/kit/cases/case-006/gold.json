@@ -1,0 +1,28 @@
+{
+  "case": "case-006",
+  "files": [
+    "apps/meteor/server/main.ts",
+    "apps/meteor/server/importPackages.ts",
+    "apps/meteor/server/api/index.ts",
+    "apps/meteor/server/meteor-methods/index.ts",
+    "apps/meteor/server/startup/index.ts",
+    "apps/meteor/server/startup/migrations/index.ts",
+    "apps/meteor/ee/server/index.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "cat apps/meteor/server/main.ts: it imports ./models, ./settings/definitions, ./routes, ./startup/rateLimiter, ./startup/robots, ./importPackages, ./meteor-methods, ./publications and ../ee/server, and calls startup() from ./startup. importPackages.ts is ~110 bare `import './...'` lines; api/index.ts:11-53 is the endpoint-group list; meteor-methods/index.ts is 148 lines of bare imports; startup/mig",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/server/main.ts",
+    "apps/meteor/server/importPackages.ts",
+    "apps/meteor/server/api/index.ts",
+    "apps/meteor/server/meteor-methods/index.ts",
+    "apps/meteor/server/startup/index.ts",
+    "apps/meteor/server/startup/migrations/index.ts",
+    "apps/meteor/ee/server/index.ts"
+  ]
+}

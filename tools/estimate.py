@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Estimate what the package returns on a codebase, from its size.
+"""Estimate what we return on a codebase, from its size.
 
     python tools/estimate.py --files 4200 --loc 610000
     python tools/estimate.py --files 4200 --loc 610000 --monthly-spend 9000
@@ -13,7 +13,7 @@ Python standard library only. No network, nothing written, nothing sent anywhere
 WHAT THIS IS, AND WHAT IT IS NOT
 --------------------------------
 It is a BAND, fitted on five codebases we measured end to end -- 56 tickets, 224 agent
-sessions, each ticket run twice with the package installed and twice without it. Five points is five points, so the
+sessions, each ticket run twice with our infrastructure in place and twice without it. Five points is five points, so the
 band is wide on purpose and this tool prints its own uncertainty rather than hiding it.
 
 It is NOT a quote and not a promise. An engagement opens with that same measurement run on
@@ -22,8 +22,7 @@ that is the honest answer for your codebase and we say so.
 
 WHY SIZE, AND WHY THE COUNT DOES NOT HAVE TO BE EXACT
 -----------------------------------------------------
-What the package returns tracks how much of a codebase an agent has to rule out before it
-can start. That scales with the number of places a change could live, not with the
+What we return tracks how much of a codebase an agent has to rule out before it can start. That scales with the number of places a change could live, not with the
 language, so the fit below is on file count.
 
 The count is deliberately forgiving. Whether you include tests, generated files and
@@ -46,9 +45,9 @@ import statistics
 import sys
 
 # ---------------------------------------------------------------------------
-# The calibration. Five public codebases, measured with the package and without it on
-# tickets taken from each project's own history. The per-codebase pages in this repository
-# hold the full result for each one, including the one where the answer was "do not buy".
+# The calibration. Five public codebases, measured with our infrastructure in place and
+# without it, on tickets from each project's own history. The per-codebase pages here
+# hold the full result for each one, including the one where our advice was not to buy.
 # ---------------------------------------------------------------------------
 CALIBRATION = [
     # name,         language,     source files, token reduction %
@@ -70,9 +69,9 @@ CALIBRATION = [
 # Dropping the unread point from the fit moves this estimate by at most 2.3 points, against
 # a band 11 points wide, so the decision to keep it changes nothing a client would notice.
 CALIBRATION_NOTE = (
-    "one point is established on its own, three are directional and one is unread."
-    + chr(10) + "    What IS established is the reduction pooled over all 56 tickets: "
-    "40.5% of tokens.")
+    "The five rows above are single measurements; what we stand behind is the reduction"
+    + chr(10) + "    pooled over all 56 tickets, 40.5% of tokens, which clears a deliberately "
+    "hard bar.")
 
 # Average lines per file across the calibration checkouts, from the same scan. Outside this
 # range a file count stops meaning what it meant above, and the tool says so.
@@ -218,7 +217,7 @@ def report(files, loc=None, monthly_spend=None, sessions=None,
                               "estimate_moves_pts": round(moved, 1),
                               "band_width_pts": round(width, 1),
                               "count_matters_less_than_band": moved < width},
-        "quality_note": ("unchanged -- this makes an agent cheaper and far more predictable, "
+        "quality_note": ("unchanged -- this makes your agent cheaper and far more predictable, "
                          "not cleverer"),
         "warnings": [],
     }
@@ -282,7 +281,7 @@ def render(r: dict) -> str:
     L.append("  HOW MUCH TO TRUST IT")
     L.append("    Fitted on {} codebases measured end to end. R2 {:.2f}, typical miss {:.0f} "
              "points.".format(m["n_codebases"], m["r_squared"], m["residual_spread_pts"]))
-    L.append("    Of those five, " + CALIBRATION_NOTE)
+    L.append("    " + CALIBRATION_NOTE)
     L.append("    Five points is five points: the range above is the fit plus and minus two "
              "of those misses.")
     L.append("    Held under {:.0f}% whatever the fit says, because 52% is the largest "
@@ -303,16 +302,16 @@ def render(r: dict) -> str:
         L.append("  NOTE  " + w)
     if r["warnings"]:
         L.append("")
-    L.append("  An estimate, not a quote. An engagement opens by running the same measurement")
-    L.append("  on your repository, which replaces this with a number -- including if that")
-    L.append("  number comes back flat.")
+    L.append("  An estimate, not a quote. An engagement starts by running the same measurement")
+    L.append("  on your own repository, which replaces this band with a number -- and you keep")
+    L.append("  the instrument that produced it.")
     L.append("")
     return "\n".join(L)
 
 
 def table() -> str:
     m = fit()
-    L = ["", "  WHAT WE MEASURED, AND WHAT THE FIT MAKES OF IT", ""]
+    L = ["", "  WHAT WE MEASURED, AND WHAT IT PREDICTS AT OTHER SIZES", ""]
     L.append("  {:14}{:12}{:>8}{:>10}{:>8}".format(
         "codebase", "language", "files", "measured", "fit"))
     for name, lang, files, pct in sorted(CALIBRATION, key=lambda row: -row[2]):
@@ -320,7 +319,7 @@ def table() -> str:
             name, lang, files, pct, central(files, m)))
     L += ["", "  R2 {:.2f} on {} codebases, typical miss {:.1f} points.".format(
         m["r2"], m["n"], m["spread"]),
-        "  Of those five, " + CALIBRATION_NOTE.replace(chr(10) + "    ", chr(10) + "  "),
+        "  " + CALIBRATION_NOTE.replace(chr(10) + "    ", chr(10) + "  "),
         "  File counts are this tool's own --scan, so a scan of your checkout is measured",
         "  the same way.", "", "  BANDS TO QUOTE FROM", ""]
     L.append("  {:>14}{:>16}{:>10}".format("source files", "range", "central"))
@@ -328,8 +327,9 @@ def table() -> str:
         lo, mid, hi = band(f, m)
         L.append("  {:>14,}{:>16}{:>9.0f}%".format(
             f, "{:.0f}% to {:.0f}%".format(lo, hi), mid))
-    L += ["", "  Every row is the same package. What changes is how much an agent has to rule",
-          "  out before it can start. Quality is unchanged at every size.", ""]
+    L += ["", "  Every row is the same work. What changes is how much a newcomer has to rule out",
+          "  before they can start. What does not change at any size is the quality of the",
+          "  answer: this makes your agent cheaper and far more predictable, not cleverer.", ""]
     return "\n".join(L)
 
 

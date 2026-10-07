@@ -1,0 +1,24 @@
+{
+  "case": "case-005",
+  "files": [
+    "js/apps/admin-ui/src/routes.tsx",
+    "js/apps/admin-ui/src/PageNav.tsx",
+    "js/apps/admin-ui/maven-resources/theme/keycloak.v2/admin/messages/messages_en.properties",
+    "js/apps/admin-ui/src/utils/useIsFeatureEnabled.ts",
+    "common/src/main/java/org/keycloak/common/Profile.java"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "js/apps/admin-ui/src/routes.tsx imports one routes module per section (:22 workflowRoutes from ./workflows/routes) and spreads them all into `export const routes` (:41-60). js/apps/admin-ui/src/PageNav.tsx:105-107 computes showWorkflows from isFeatureEnabled(Feature.Workflows) and :155 renders <LeftNav title=\"workflows\" path=\"/workflows\" />; the other sections are the LeftNav entries at :126-160.",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "js/apps/admin-ui/src/routes.tsx",
+    "js/apps/admin-ui/src/PageNav.tsx",
+    "js/apps/admin-ui/maven-resources/theme/keycloak.v2/admin/messages/messages_en.properties",
+    "js/apps/admin-ui/src/utils/useIsFeatureEnabled.ts",
+    "common/src/main/java/org/keycloak/common/Profile.java"
+  ]
+}

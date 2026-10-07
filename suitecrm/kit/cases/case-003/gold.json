@@ -1,0 +1,30 @@
+{
+  "case": "case-003",
+  "files": [
+    "lib/Utility/BeanJsonSerializer.php",
+    "lib/Utility/BeanJsonSerializer.yml",
+    "lib/Search/Index/Documentify/SearchDefsDocumentifier.php",
+    "lib/Search/Index/Documentify/SearchDefsDocumentifier.yml",
+    "lib/Search/Index/Documentify/JsonSerializerDocumentifier.php",
+    "lib/Utility/ArrayMapper.php",
+    "lib/Search/ElasticSearch/ElasticSearchIndexer.php",
+    "lib/Robo/Plugin/Commands/ElasticSearchCommands.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "ElasticSearchCommands.php:111 '@param int $searchdefs 0 = BeanJsonSerializer | 1 = SearchDefsDocumentifier' and :117-122 elasticIndex($differential, $searchdefs) -> ElasticSearchIndexer::repairElasticsearchIndex($differential, $searchdefs). BeanJsonSerializer.php:65 $this->mapper->loadYaml(__DIR__ . '/BeanJsonSerializer.yml'); SearchDefsDocumentifier.php:85 ->loadYaml(__DIR__ . '/SearchDefsDocumen",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "lib/Utility/BeanJsonSerializer.php",
+    "lib/Utility/BeanJsonSerializer.yml",
+    "lib/Search/Index/Documentify/SearchDefsDocumentifier.php",
+    "lib/Search/Index/Documentify/SearchDefsDocumentifier.yml",
+    "lib/Search/Index/Documentify/JsonSerializerDocumentifier.php",
+    "lib/Utility/ArrayMapper.php",
+    "lib/Search/ElasticSearch/ElasticSearchIndexer.php",
+    "lib/Robo/Plugin/Commands/ElasticSearchCommands.php"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": "case-005",
+  "files": [
+    "ModuleInstall/ModuleScanner.php",
+    "ModuleInstall/ModuleScannerVisitor.php",
+    "ModuleInstall/ModuleInstaller.php",
+    "modules/Administration/UpgradeWizard.php",
+    "modules/Administration/UpgradeWizard_commit.php",
+    "modules/Administration/UpgradeWizard_prepare.php",
+    "modules/UpgradeWizard/upload.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "grep -rn 'new ModuleScanner' --include=*.php . -> ModuleInstall/ModuleInstaller.php:77, modules/Administration/UpgradeWizard.php:146, modules/Administration/UpgradeWizard_commit.php:206, modules/Administration/UpgradeWizard_prepare.php:104, modules/UpgradeWizard/upload.php:125. Inside ModuleScanner.php: :77 $blackListExempt, :80 $validExt, :118 $blackList, :453-457 the map to MODULE_INSTALLER_PACK",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "ModuleInstall/ModuleScanner.php",
+    "ModuleInstall/ModuleScannerVisitor.php",
+    "ModuleInstall/ModuleInstaller.php",
+    "modules/Administration/UpgradeWizard.php",
+    "modules/Administration/UpgradeWizard_commit.php",
+    "modules/Administration/UpgradeWizard_prepare.php",
+    "modules/UpgradeWizard/upload.php"
+  ]
+}

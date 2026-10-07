@@ -1,0 +1,32 @@
+{
+  "case": "case-008",
+  "files": [
+    "Api/Core/app.php",
+    "Api/V8/Config/routes.php",
+    "Api/Core/Loader/ContainerLoader.php",
+    "Api/V8/Config/services.php",
+    "lib/API/core/app.php",
+    "lib/API/core/containers.php",
+    "lib/API/v8/route/moduleRoutes.php",
+    "lib/API/v8/route/oauth2Routes.php",
+    "lib/API/v8/route/schemaRoutes.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Api/index.php does chdir('../') then requires Core/app.php; Api/Core/app.php builds `new \\Slim\\App(\\Api\\Core\\Loader\\ContainerLoader::configure())` and then `(new \\Api\\Core\\Loader\\RouteLoader())->configureRoutes($app)`. Api/V8/Config/routes.php:12-40 is the `$app->group('', ...)` / `$app->group('/V8', ...)` table (POST /access_token, GET /meta/modules, ...). On the other side, lib/API/core/app.php:",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "Api/Core/app.php",
+    "Api/V8/Config/routes.php",
+    "Api/Core/Loader/ContainerLoader.php",
+    "Api/V8/Config/services.php",
+    "lib/API/core/app.php",
+    "lib/API/core/containers.php",
+    "lib/API/v8/route/moduleRoutes.php",
+    "lib/API/v8/route/oauth2Routes.php",
+    "lib/API/v8/route/schemaRoutes.php"
+  ]
+}

@@ -1,0 +1,1 @@
+Document rendering and record search in this product both make their back-ends swappable using the same hand-written pattern rather than a container. Where are the two registries, where does each one look for a third-party back-end dropped in from outside, and which pair of classes persists the chosen default — and into which file?

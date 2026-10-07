@@ -3,8 +3,8 @@ Copyright 2026 Marc Verriere. All rights reserved.
 ## What this repository is
 
 Nine worked examples of a context-engineering engagement, published so that a prospective
-client can see what one delivers and what it measured. Each `*/kit/` directory is the complete
-benchmark deliverable for that codebase, unedited.
+client can see the work and the numbers before buying either. Each `*/kit/` directory is the
+measuring tool we would leave with that client, unedited.
 
 ## What you may do with it
 
@@ -13,8 +13,8 @@ what the case studies invite you to do, and the measurements are worth nothing i
 reproduce them. `tools/estimate.py` is free to run on anything you like, including your own
 private repositories: it has no network access and reads no file contents.
 
-The kits themselves are not offered under an open-source licence. They are engagement
-deliverables, shown here as examples. Each one is written against one specific codebase: its
+The kits themselves are not offered under an open-source licence. They are part of an
+engagement, shown here as examples. Each one is written against one specific codebase: its
 value is in the study of that codebase, not in the file format, so copying one into a different
 repository gains you nothing a blank file would not.
 

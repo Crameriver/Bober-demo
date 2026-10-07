@@ -1,0 +1,26 @@
+{
+  "case": "case-007",
+  "files": [
+    "packages/apps-engine/package.json",
+    "packages/apps/package.json",
+    "packages/apps/src/server/compiler/AppPackageParser.ts",
+    "packages/apps/deno-runtime/main.ts",
+    "apps/meteor/server/services/apps-engine/service.ts",
+    "docs/apps-engine-migration.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Parsed both manifests: @rocket.chat/apps-engine has files ['definition/**'] and description 'The public API and type definitions for Rocket.Chat App development.', while @rocket.chat/apps is private:true with files ['dist/','base-runtime/','node-runtime/','deno-runtime/','.deno-cache/']. ls packages/apps shows base-runtime, deno-runtime, node-runtime, src, tests; packages/apps/deno-runtime/{main.t",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "packages/apps-engine/package.json",
+    "packages/apps/package.json",
+    "packages/apps/src/server/compiler/AppPackageParser.ts",
+    "packages/apps/deno-runtime/main.ts",
+    "apps/meteor/server/services/apps-engine/service.ts",
+    "docs/apps-engine-migration.md"
+  ]
+}

@@ -1,0 +1,1 @@
+Dropping a correctly-shaped theme folder into the source tree is not enough for the running server to offer it. Which class defines the discovery contract and the resource name it reads, and which three modules whose artifacts the server itself depends on at runtime - not test fixtures or test-only provider modules - carry that declaration?

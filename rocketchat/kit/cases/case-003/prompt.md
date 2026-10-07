@@ -1,0 +1,1 @@
+An alpha, off-by-default endpoint turns existing REST routes into tools for external agent clients, speaks JSON-RPC over POST and answers 405 to GET. Which files implement its handshake, transport, tool catalogue and dispatch, which startup file grants the permission it requires, where is its enabling setting declared, and which shared middleware changes behaviour when it is on?

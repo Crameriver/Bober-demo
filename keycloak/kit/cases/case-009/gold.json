@@ -1,0 +1,24 @@
+{
+  "case": "case-009",
+  "files": [
+    "services/src/main/java/org/keycloak/theme/ClasspathThemeProviderFactory.java",
+    "themes/src/main/resources/META-INF/keycloak-themes.json",
+    "js/apps/admin-ui/maven-resources/META-INF/keycloak-themes.json",
+    "js/apps/account-ui/maven-resources/META-INF/keycloak-themes.json"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "services/src/main/java/org/keycloak/theme/ClasspathThemeProviderFactory.java:34 declares KEYCLOAK_THEMES_JSON = \"META-INF/keycloak-themes.json\" and :45 loads themes from that classpath resource. `find js/apps/*/maven-resources/META-INF themes/src/main/resources/META-INF -type f` returns exactly those three manifests; their contents (base: admin/account/login/email, keycloak: login/common/email/wel",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "services/src/main/java/org/keycloak/theme/ClasspathThemeProviderFactory.java",
+    "themes/src/main/resources/META-INF/keycloak-themes.json",
+    "js/apps/admin-ui/maven-resources/META-INF/keycloak-themes.json",
+    "js/apps/account-ui/maven-resources/META-INF/keycloak-themes.json"
+  ],
+  "question_narrowed": "A smoke session and a rival-answer sweep found a second defensible answer to the original wording; the question was narrowed to identify which mechanism is asked about. The answer key was NOT changed.",
+  "rival_answer_excluded": "The three test modules that also ship a META-INF/keycloak-themes.json manifest - tests/custom-providers, testsuite/integration-arquillian/servers/auth-server/services/testsuite-providers, and testsuite/integration-arquillian/tests/base - each declaring real themes through exactly the keyed discovery contract."
+}

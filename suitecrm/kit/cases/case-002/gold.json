@@ -1,0 +1,42 @@
+{
+  "case": "case-002",
+  "files": [
+    "metadata/queues_queueMetaData.php",
+    "metadata/queues_beansMetaData.php",
+    "metadata/fields_meta_dataMetaData.php",
+    "metadata/usersMetaData.php",
+    "metadata/users_last_importMetaData.php",
+    "metadata/schedulers_timesMetaData.php",
+    "metadata/projects_quotesMetaData.php",
+    "metadata/project_task_project_tasksMetaData.php",
+    "metadata/kbdocuments_views_ratingsMetaData.php",
+    "metadata/emails_email_templatesMetaData.php",
+    "metadata/audit_templateMetaData.php",
+    "include/database/DBManager.php",
+    "data/SugarBean.php",
+    "modules/Audit/Audit.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "`ls metadata | sort` (88 files) compared with `grep -o 'metadata/[A-Za-z0-9_]*MetaData\\.php' modules/TableDictionary.php | sed 's|metadata/||' | sort -u` (76) leaves 12. Then for each of the 12, `grep -rl \"metadata/<name>\" . --exclude-dir=.ast-cache | grep -v '^./metadata/'`: ten return only ./files.md5; metadata/oauth_nonce.php turns out to be included by modules/TableDictionary.php after all (my",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "metadata/queues_queueMetaData.php",
+    "metadata/queues_beansMetaData.php",
+    "metadata/fields_meta_dataMetaData.php",
+    "metadata/usersMetaData.php",
+    "metadata/users_last_importMetaData.php",
+    "metadata/schedulers_timesMetaData.php",
+    "metadata/projects_quotesMetaData.php",
+    "metadata/project_task_project_tasksMetaData.php",
+    "metadata/kbdocuments_views_ratingsMetaData.php",
+    "metadata/emails_email_templatesMetaData.php",
+    "metadata/audit_templateMetaData.php",
+    "include/database/DBManager.php",
+    "data/SugarBean.php",
+    "modules/Audit/Audit.php"
+  ]
+}

@@ -1,0 +1,1 @@
+Bumping this project's release version touches far more than the Maven coordinates. Using the repository's own bump tooling as the specification, list every file it rewrites - and identify the single rewrite whose pattern no longer matches anything in its target file, so that one step silently does nothing.

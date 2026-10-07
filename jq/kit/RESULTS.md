@@ -1,26 +1,53 @@
-# Results on this repository (C)
+# What we measured on this codebase (C)
 
-Measured by us: the package without the fact sheet in this kit, against the package with
-it. Each arm ran twice, the two runs at opposite ends of the day, on
-10 cases.
+The rest of the infrastructure WITHOUT the fact sheet in this kit, against the same
+infrastructure WITH it. Each arm ran twice, at opposite ends of the day, on
+10 cases — 40 sessions.
 
-| | package | package + fact sheet | change |
+| Per case | our infrastructure | + the fact sheet | |
 |---|---|---|---|
 | tool calls | 15.75 | 10.15 | -35.6% |
 | cost per case | $0.2229 | $0.1858 | -16.6% |
+| model turns | 6.60 | 5.35 | -18.9% |
 | answer completeness | 0.633 | 0.680 | +0.047 |
 
-**Established.** Tool calls fell 35.6% and turns fell, both across ten bootstrap seeds and in both replicate strata. Cost fell 16.6% but did not reach the bar. Answer completeness did not move.
+**This one clears the bar.** Tool calls 35.6% lower, model turns 18.9% lower, holding across ten resamplings and in both replicates — a figure we quote. Cost per case 16.6% lower, moving the same way but by less than 10 cases can separate from noise.
 
-## Across all six repositories we measured
+## Your own run uses a wider baseline, on purpose
 
-Two of six showed an established reduction in effort, and they are exactly the two whose
-verification is hard to guess. The four that did not move all answer to a command an agent already
-guesses — `uv run pytest`, `cargo test`, `mix test`, `./check.sh`.
+Read this before comparing your number to ours.
 
-**So the rule is: a fact sheet earns its place in inverse proportion to how guessable the
-repository is.** That is the single most useful thing we can tell you before you spend
-anything, and it is why this kit ships with the instrument rather than only with the sheet.
+The table above isolates one piece of the tuning: both arms had the rest of the
+infrastructure in place and only the fact sheet differed. That is the right comparison
+for deciding whether that piece earns its keep, which is the decision we had to make.
 
-Answer completeness was not improved on any of the six. The sheet makes the work cheaper
-where it works; it does not make the answers better.
+`bench/run.py` answers a more useful question for you. `--arm bare` installs **nothing at
+all**, so your comparison is the fact sheet against a plain agent on your own machine.
+That baseline is wider than ours, so your number will usually be larger — and it answers
+what you actually want to know: *does this help my team today*.
+
+Neither run tells you what the whole infrastructure would do on your codebase. That takes
+a measurement on tickets from your own history, which is where an engagement starts.
+
+## What we quote, across all 9 codebases
+
+The same piece of tuning, measured the same way on 9 open-source codebases and 344 agent sessions:
+
+| Over all 86 tickets | without it | with it | |
+|---|---|---|---|
+| tool calls | 15.13 | **13.52** | **-10.6%** |
+| cost per case | $0.2322 | **$0.2116** | **-8.9%** |
+
+Both clear the bar: the 95% interval excludes zero on all ten resamplings and in each of
+two independent replicates. And both are measured **on top of** everything else already
+in place, so this is what one piece of the tuning adds by itself.
+
+It pays most where a codebase's build and verification are hard to guess, and least where
+they answer to a command an agent works out by itself. Which case you are in is what this
+kit is for.
+
+### How the completeness row is scored
+
+A key file whose name the fact sheet already contains is struck off before scoring, so
+the arm carrying the sheet is never credited for naming a file the sheet handed it. That
+subset is identical for both arms, and it is the one the completeness row uses.

@@ -1,17 +1,18 @@
-# What gets installed
+# What we set up
 
-## The problem it addresses
+## The problem we are hired to fix
 
-Ask an AI coding agent to fix a defect in a codebase it does not know, and most of what you
-pay for is not the fix. It is the search: listing directories, grepping for a word that turns
-out to mean something else here, reading a whole file to learn it was the wrong file, and
-occasionally following a confident wrong guess for forty tool calls.
+Ask an AI coding agent to fix a defect in a codebase it does not know, and most of what you pay
+for is not the fix. It is the search: listing directories, grepping for a word that turns out to
+mean something else here, reading a whole file to learn it was the wrong file, and occasionally
+following a confident wrong guess for forty tool calls.
 
-That cost is not a property of the model. It is a property of **how much a newcomer has to
-rule out before they can start** — and that is a property of your repository.
+That cost is not a property of the model you chose. It is a property of **how much a newcomer has
+to rule out before they can start** — which is a property of your codebase, and therefore
+something we can work on.
 
 ```
-without                                                    with the package
+your team today                                            after we have been in
 ────────────────────────────────────────────────────       ──────────────────────────
 ls · grep · read · grep · read · wrong file · read         orient · read · read
 grep · read · read · ls · grep · read · right file         right file · fix · verify
@@ -20,78 +21,67 @@ fix · guess how to test · guess again · verify
 26 tool calls, 1 session in 7 past forty                    1 session in 22 past forty
 ```
 
-## What the package is
+## What we install
 
-One package, installed into your repository and then fitted to it:
+One infrastructure, set up inside your repository and then fitted to it:
 
-**A context engine.** It decides what the agent is told and when. It is the part that makes
-the rest arrive at the moment it is useful rather than sitting in the agent's context
+**A context engine.** It decides what your agent is told, and when. It is the part that makes
+everything else arrive at the moment it is useful rather than sitting in the agent's context
 costing money on every turn.
 
-**An index of your code.** Built over your repository, kept current as the repository moves.
+**An index of your code**, built over your repository and kept current as the repository moves.
 
-**Project memory.** What the team — human or agent — has already established, carried from
-one session to the next instead of rediscovered.
+**Project memory.** What your team — human or agent — has already established, carried from one
+session to the next instead of rediscovered every morning.
 
-**Retrieval tuned to your repository.** Not a generic search over a generic corpus: the
-retrieval knows this repository's vocabulary, its conventions, and which of its names are
-misleading.
+**Retrieval tuned to your repository.** Not a generic search over a generic corpus: it knows your
+vocabulary, your conventions, and which of your names are misleading.
 
-**Delivery at the moment it matters.** The package acts when an agent is about to go the
-wrong way, rather than by filling its context up front. This is the part that most
-distinguishes it from a document you write and hope gets read — and we have measured the
-difference between the two.
+**Delivery at the moment it matters.** We act when an agent is about to go the wrong way, rather
+than by filling its context up front. This is what most distinguishes the work from a document
+somebody writes and hopes gets read — and we have measured the difference between the two.
 
-**The benchmark.** The instrument that measured all of the above, left with you, so the
-next person can check the claim instead of trusting it. See
-[the kits](../README.md#the-benchmark-is-part-of-the-deliverable).
+**The measurement**, run before and after, and then left with you.
+→ [How we measure](EVIDENCE.md)
 
-## What the fitting is
+## The tuning is the work
 
-Installing is an afternoon. Fitting is the work: finding what is ambiguous in *this*
-repository — which concept wears two names, which directory is frozen, which file looks like
-the one you want and is not, how this project is actually built and verified — and wiring
-that into the package so it arrives at the right moment.
+Setting it up is an afternoon. Fitting it is what you are paying for: finding what is ambiguous in
+*your* codebase — which concept wears two names, which directory is frozen, which file looks like
+the one you want and is not, how the project is actually built and verified — and wiring that in so
+it arrives at the right moment.
 
-Fitting is measured, not asserted. Each piece of it is run against the same package without
-it, on tickets from your own history, and a piece that does not earn its place is removed
-rather than shipped. The second study on the landing page is one such measurement, published
-with the four codebases where the answer was *no effect*.
+And the tuning is measured, not asserted. Across nine codebases and 344 agent sessions, one piece
+of it on its own cut **tool calls by 10.6% and cost by 8.9%** — both clearing the bar, both on top
+of everything else already in place. On [jq](../jq/) that piece alone cut tool calls by 36%; on
+[Polly](../polly/) it cut cost by 20%.
 
-## What it does not do
+It pays most where a codebase's build and verification are hard to guess, and least where they
+answer to a command an agent works out by itself. **Your codebase decides which, so we measure
+before we promise.**
 
-**It does not make the agent cleverer.** Across 56 tickets the fix landed on the right file
-40.5 times without the package and 42.5 times with it — a difference inside what the
-benchmark produces by chance. Every page here says so. If someone offers you both cheaper
-*and* smarter from a context layer, ask to see the quality row.
+## What we do not claim
 
-**It does not change your code.** Nothing it installs is compiled into your product. It is
+**We do not make your agent cleverer.** Across 56 tickets the fix landed on the right file 40.5
+times without us and 42.5 times with us — a difference inside what the benchmark produces by
+chance. We say this before you ask, because the first thing a careful engineer on your side will
+do is look for the quality row. If a vendor offers you cheaper *and* smarter from a context layer,
+ask them for theirs.
+
+**We do not change your code.** Nothing we install is compiled into your product. It is
 configuration, context and tooling that sit beside the repository.
 
-**It does not send your code anywhere.** The package runs locally, beside the agent you
-already use. The estimator in this repository reads file names and counts lines and has no
-network access at all.
+**Your code does not leave your machine.** Everything runs locally, beside the agent you already
+use. The estimator in this repository has no network access at all.
 
-**It does not depend on one model or one vendor.** It shapes what the agent is told; it does
-not care which agent.
+**We are not tied to one model or one vendor.** We shape what your agent is told; we do not care
+which agent it is, and when you change model you re-measure rather than re-buy.
 
-**It does not always pay.** On an eighty-file utility, the measured gain was 12% of tokens
-and nothing we could establish. That codebase has [its own page](../jq/) saying so.
-
-## Why there are no per-component numbers
-
-The numbers published here belong to the package as a whole. That is a deliberate choice,
-and it is the honest one: when we measured components individually, several of the obvious
-ones turned out to be worth nothing or worse — a ranked list of likely files *lost* six
-tickets of eighteen, an index exposed as tools the agent could call was never called in 205
-sessions, and a command named in the agent's own context was never run in 212. Those are on
-the landing page under *what we measured and threw away*.
-
-A vendor who gives you a number per component is either measuring at a level that cannot
-support it, or has not tried to refute any of them.
+**It does not always pay.** On an eighty-file utility the measured gain was 12% of tokens, and our
+advice was not to buy — [that page is still here](../jq/). You get the same answer about your own
+codebase before you spend anything with us.
 
 ---
 
-[Why these numbers can be believed](EVIDENCE.md) ·
-[What an engagement looks like](ENGAGEMENT.md) ·
-[Estimate your own repository](ESTIMATE.md)
+[How we measure](EVIDENCE.md) · [How an engagement runs](ENGAGEMENT.md) ·
+[What will it save on your codebase?](ESTIMATE.md)

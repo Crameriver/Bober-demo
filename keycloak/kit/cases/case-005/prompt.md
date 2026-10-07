@@ -1,0 +1,1 @@
+Adding a new left-hand navigation section to the React administration console means registering it in two aggregate files and supplying one label string. Find all of those, plus the TypeScript enum and the Java enum whose entries must agree for the newest section to be visible at all.

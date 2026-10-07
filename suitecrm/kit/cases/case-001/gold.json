@@ -1,0 +1,24 @@
+{
+  "case": "case-001",
+  "files": [
+    "lib/PDF/PDFWrapper.php",
+    "lib/Search/SearchWrapper.php",
+    "lib/PDF/PDFConfigurator.php",
+    "lib/Search/SearchConfigurator.php",
+    "modules/Configurator/Configurator.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "PDFWrapper.php:58-72 static $engines keyed by class name with 'name'/'FQN'/'filepath' entries for TCPDFEngine and LegacyMPDFEngine; :80 addEngine(); :98 and :126 include custom/application/Ext/PDF/pdfs.ext.php (the 'pdf' row of ModuleInstall/extensions.php); :136-140 getDefaultEngine() reads getPDFConfig('defaultEngine'). SearchWrapper.php:63-76 is the same shape for ElasticSearchEngine, BasicSear",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "lib/PDF/PDFWrapper.php",
+    "lib/Search/SearchWrapper.php",
+    "lib/PDF/PDFConfigurator.php",
+    "lib/Search/SearchConfigurator.php",
+    "modules/Configurator/Configurator.php"
+  ]
+}

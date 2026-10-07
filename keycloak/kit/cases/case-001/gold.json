@@ -1,0 +1,28 @@
+{
+  "case": "case-001",
+  "files": [
+    "misc/db-compatibility-verifier/pom.xml",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/VerifyMojo.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/AbstractMojo.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/ChangeLogXMLParser.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/KeycloakMigrationParser.java",
+    "model/jpa/pom.xml",
+    "model/storage-private/pom.xml"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "model/jpa/pom.xml:41-42 set db.verify.supportedFile / db.verify.unsupportedFile to src/main/resources/META-INF/rolling-upgrades-{,un}supported-changes.json, and :181-193 bind db-compatibility-verifier-maven-plugin goal `verify` to <phase>test</phase> (profile `db-snapshot` at :199-215 is what creates the files). model/storage-private/pom.xml:15-17 adds db.verify.migration.package=org.keycloak.migr",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "misc/db-compatibility-verifier/pom.xml",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/VerifyMojo.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/AbstractMojo.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/ChangeLogXMLParser.java",
+    "misc/db-compatibility-verifier/src/main/java/org/keycloak/db/compatibility/verifier/KeycloakMigrationParser.java",
+    "model/jpa/pom.xml",
+    "model/storage-private/pom.xml"
+  ]
+}

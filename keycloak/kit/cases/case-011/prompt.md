@@ -1,0 +1,1 @@
+The server-rendered login interface exists in this repository under two different theme names. What code decides which of the two a realm gets when nothing is configured, what gates that decision, and where does each name's own configuration file live?

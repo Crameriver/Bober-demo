@@ -1,0 +1,28 @@
+{
+  "case": "case-010",
+  "files": [
+    "apps/meteor/packages/rocketchat-coverage/package.js",
+    "apps/meteor/packages/rocketchat-coverage/plugin/compile-version.js",
+    ".github/actions/meteor-build/action.yml",
+    "apps/meteor/.swcrc",
+    "apps/meteor/.babelrc",
+    "codecov.yml",
+    "docs/coverage.md"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "docs/coverage.md names the three stages and the rocketchat:coverage package path. apps/meteor/packages/rocketchat-coverage/package.js declares `api.mainModule('plugin/compile-version.js','server')` and Npm.depends on istanbul-lib-report/istanbul-reports/istanbul-lib-coverage; that plugin file reads COVERAGE_DIR/COVERAGE_FILE_NAME/COVERAGE_REPORTER and registers process.on('exit'). .github/actions/",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/packages/rocketchat-coverage/package.js",
+    "apps/meteor/packages/rocketchat-coverage/plugin/compile-version.js",
+    ".github/actions/meteor-build/action.yml",
+    "apps/meteor/.swcrc",
+    "apps/meteor/.babelrc",
+    "codecov.yml",
+    "docs/coverage.md"
+  ]
+}

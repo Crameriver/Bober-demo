@@ -1,0 +1,1 @@
+Uploaded customisation packages are statically analysed before this application will install them. Which files implement that analysis, which configuration key can relax it, and which upload/prepare/commit paths construct the analyser?

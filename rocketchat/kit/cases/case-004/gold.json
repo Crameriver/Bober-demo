@@ -1,0 +1,30 @@
+{
+  "case": "case-004",
+  "files": [
+    "apps/meteor/server/api/api.ts",
+    "apps/meteor/server/api/index.ts",
+    "apps/meteor/server/api/v1/middlewares/experimental.ts",
+    "apps/meteor/server/api/v1/middlewares/experimental.spec.ts",
+    "apps/meteor/server/api/experimental/rooms.setCategory.ts",
+    "packages/rest-typings/src/experimental/index.ts",
+    "packages/rest-typings/src/index.ts",
+    "apps/meteor/client/hooks/useExperimentalEndpoint.ts"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "apps/meteor/server/api/api.ts:44 declares `experimental: APIClass<'/experimental'>`, :76-77 createApi({version:'experimental'}), :127-128 basePathRegex /^\\/api\\/experimental\\//, :153 .use(experimentalWarningMiddleware(...)), :157 .use(API.experimental.router). middlewares/experimental.ts:3 comment and :25 `c.res.headers.set('x-experimental','true')`; its .spec.ts:43,51,59,84 assert the header pres",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "apps/meteor/server/api/api.ts",
+    "apps/meteor/server/api/index.ts",
+    "apps/meteor/server/api/v1/middlewares/experimental.ts",
+    "apps/meteor/server/api/v1/middlewares/experimental.spec.ts",
+    "apps/meteor/server/api/experimental/rooms.setCategory.ts",
+    "packages/rest-typings/src/experimental/index.ts",
+    "packages/rest-typings/src/index.ts",
+    "apps/meteor/client/hooks/useExperimentalEndpoint.ts"
+  ]
+}

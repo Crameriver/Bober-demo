@@ -1,0 +1,105 @@
+# How this fact sheet was built, and what was thrown away
+
+The sheet beside this file is short on purpose. It was produced in three passes: one pass read
+the repository and wrote down everything it believed; a second pass attacked every claim; a third
+kept only what it could re-verify itself.
+
+**32 facts kept, 9 dropped.** That ratio is the useful part of this page: facts about a
+repository that cannot go stale are harder to produce than they look, and a sheet that is 40%
+wrong is worse than no sheet, because an agent follows it.
+
+## Kept — each one with the check used
+
+- Yarn 4 workspaces driven by turbo — grep -n '"workspaces"\|packageManager' package.json -> line 17 workspaces globs (apps/*, packages/*, ee/apps/*, ee/packages/*, apps/meteor/ee/server/services), line 223 "packageManager": "yarn@4.18.0"; turbo.json exists at root and root scripts are `turbo run <task>`
+- Meteor 3.5.2 — cat apps/meteor/.meteor/release -> METEOR@3.5.2
+- `yarn install` then `yarn build` must come first — grep -n '"build"' package.json:25 -> "turbo run build"; .github/workflows/ci.yml:269 job `packages-build` runs before every test job and uploads the artifact
+- every workspace `dist/` is gitignored — grep -n '^dist' .gitignore -> line 15 `dist`
+- CI ships the built packages as the `packages-build` artifact before any test job — .github/workflows/ci.yml:341-345 'Upload packages build artifact' name: packages-build; .github/workflows/ci-test-unit.yml:50 `uses: ./.github/actions/restore-packages`, whose action.yml downloads artifact `packages-build`
+- all unit tests = `yarn testunit` — grep -n '"testunit"' package.json:35 -> "turbo run testunit"; .github/workflows/ci-test-unit.yml:53 `run: yarn testunit --concurrency=1`
+- one workspace = `yarn workspace <pkg> testunit` — 48 of the 78 workspace manifests define a `testunit` script (grep -l '"testunit"' packages/*/package.json ee/*/*/package.json apps/*/package.json | wc -l -> 48); turbo.json declares `testunit` as a task
+- apps/meteor `testunit` is three runs: guard mocha, jest, mocha+nyc — apps/meteor/package.json:60 "testunit": "yarn .testunit:definition && yarn .testunit:jest && yarn .testunit:server:cov" with lines 26-29 mapping those to --config ./.mocharc.definition.js, jest, and nyc + --config ./.mocharc.js
+- .mocharc.definition.js is the type-guard suite — cat apps/meteor/.mocharc.definition.js -> header 'Mocha configuration for unit tests for type guards', spec: ['tests/unit/definition/**/*.spec.ts']
+- `yarn testapi` is the mocha REST suite — apps/meteor/package.json:57 testapi -> `mocha --config ./.mocharc.api.js`; that config's spec globs are tests/end-to-end/api/*.ts, .../helpers, .../methods, tests/end-to-end/apps/*
+- `yarn test:e2e [file]` is Playwright and accepts one spec — apps/meteor/package.json:54 "test:e2e": "playwright test"; apps/meteor/tests/e2e/README.md -> `yarn test:e2e ./tests/e2e/administration.spec.ts`
+- both integration suites need a live server (`TEST_MODE=true yarn dev` or CI's compose stack) — apps/meteor/tests/e2e/README.md: 'The application must be started with TEST_MODE=true'; .github/workflows/ci-test-e2e.yml:185-212 starts containers, then :242/:259/:275 run npm run testapi* and :309 yarn test:e2e
+- `yarn lint` and typecheck both shell out to `meteor lint` — apps/meteor/package.json:42 "lint": "yarn stylelint && meteor lint && yarn eslint ." and :62 "typecheck": "meteor lint && cross-env ... tsc --noEmit --skipLibCheck"; .github/workflows/ci-code-check.yml has an 'Install Meteor' step before both the TS and lint matrix legs
+- a user-visible change needs a changeset — cat .changeset/config.json (baseBranch line 8 = develop, fixed group [meteor, core-typings, rest-typings]); .github/PULL_REQUEST_TEMPLATE.md links the changeset guideline; ls .changeset shows ~47 pending entries
+- apps/meteor server code is grouped by responsibility then domain — ls apps/meteor/server -> api, bridges, configuration, cron, database, email, features, hooks, lib, meteor-methods, modules, publications, routes, services, settings, slashcommands, startup, ufs; docs/backend-folder-structure.md 'The organizing principle: server/<responsibility>/<domain>/<file>'
+- the ee/ directory IS the license boundary — docs/backend-folder-structure.md 'The directory boundary is the license boundary... Never move a file across the ee/ boundary in either direction - that silently relicenses it'; apps/meteor/ee/LICENSE exists next to the MIT root LICENSE
+- `packages/` holds the @rocket.chat/* workspaces — ls packages | wc -l -> 61 dirs; each manifest's name is @rocket.chat/* (e.g. packages/i18n -> @rocket.chat/i18n, packages/message-parser -> @rocket.chat/message-parser)
+- `apps/meteor/packages/` holds Meteor/Atmosphere packages, a different thing — ls apps/meteor/packages -> autoupdate, linkedin-oauth, meteor-cookies, ..., rocketchat-version; each has a package.js calling Package.describe({name: 'rocketchat:...'}), not a package.json
+- `tests/end-to-end/` is mocha REST — apps/meteor/.mocharc.api.js spec globs point at tests/end-to-end/**; ls apps/meteor/tests/end-to-end -> api, apps, reporter.ts, teardown.ts
+- `tests/e2e/` is Playwright UI — apps/meteor/playwright.config.ts + apps/meteor/tests/e2e/*.spec.ts; tests/e2e/README.md is titled 'E2E Testing with playwright'
+- nothing is auto-discovered - a new module needs a side-effect import in its folder's barrel — apps/meteor/server/importPackages.ts (~110 bare `import './...'` lines), server/api/index.ts:11-53, server/meteor-methods/index.ts (148 lines of bare imports), server/startup/migrations/index.ts, server/settings/definitions.ts, server/lib/rooms/roomTypes/index.ts, ee/server/patches/index.ts
+- forgetting the import leaves lint, tsc and tests green — docs/backend-folder-structure.md, meteor-methods row: 'a method file that nobody imports silently stops existing (lint/tsc/tests all stay green)'; reproduced independently: ee/server/patches/fetchContactHistory.ts is referenced by nothing (grep -rn fetchContactHistory) yet the tree is consistent
+- models wire by string key in three places — packages/models/src/proxify.ts handler('<namespace>') + `throw new Error(\`Model ${namespace} not found\`)`; packages/models/src/index.ts tail `registerServiceModels()` with registerModel('IUsersModel', ...); apps/meteor/server/models.ts has 76 registerModel(...) calls (grep -c registerModel)
+- a model key mismatch fails only at runtime — packages/models/src/proxify.ts: the namespace is a plain string argument to proxify<T>() and registerModel(), so nothing type-checks the pairing; the error is raised inside the Proxy get handler
+- only `en.i18n.json` is edited; other locales are derived — docs/i18n.md 'en.i18n.json is the base language. It is the only file you should edit'; packages/i18n/src/scripts/check.mts implements sort-base-keys/sort-keys/wipe-extra-keys; packages/i18n/package.json lint = eslint + check.mts
+- a misspelled translation key is not a compile error — cat packages/i18n/src/resources.ts -> '// dummy' with 10 placeholder keys; packages/i18n/src/index.ts declares `interface TFunction` overloads (additive, not narrowing); docs/i18n.md 'A misspelled key is not a compile error'
+- `apps/meteor/app/` is frozen; only */lib, theme/client and apps/server remain — find apps/meteor/app -maxdepth 2 -type d -> only */lib dirs plus app/theme/client and app/apps/server; find apps/meteor/app -maxdepth 2 -type d -name server -> apps/meteor/app/apps/server only
+- `imports/`, `server/meteor-methods/`, `server/publications/` are deprecated — ls apps/meteor/imports -> personal-access-tokens only; docs/backend-folder-structure.md marks meteor-methods and publications '**Deprecated.**' and says 'A Meteor method or publication -> don't'
+- the two unit runners have disjoint allow-lists — apps/meteor/.mocharc.js has an explicit `spec:` array of ~28 globs plus an `ignore:` for two jest-owned specs; apps/meteor/jest.config.ts has two projects with explicit `testMatch` arrays. Neither scans the tree.
+- a spec matched by neither list silently never runs — the two configs above are allow-lists, and docs/backend-folder-structure.md states it: 'A spec in a folder not matched by any glob silently never runs'
+- a jest-style spec caught by a mocha glob dies with `jest is not defined` — docs/backend-folder-structure.md Tests section, verbatim; corroborated by the comment at apps/meteor/.mocharc.js lines 8-11 explaining why getUserInfo.spec.ts and the business-hour specs are in `ignore`
+- some committed paths under apps/meteor/private/ and public/ are symlinks into node_modules or a generated dist/ — find over those trees for files <200 bytes whose content starts with '../' -> 7 hits, e.g. apps/meteor/private/i18n -> ../../../packages/i18n/dist/resources, private/moment-locales -> ../node_modules/moment/locale, public/workers/mp3-encoder/index.js -> ../../../node_modules/@rocket.chat/mp3-encoder/dist/index.js (this Windows checkout stores symlinks as text, which is how the targets are readable)
+
+## Dropped — and why
+
+- `yarn workspace @rocket.chat/meteor set-version` is the way to stamp a version. — The `set-version` script points at `.scripts/set-version.js`, which does not exist. `ls apps/meteor/.scripts/` returns only make-migration.ts, migration.template, run-ha.ts, version.js, and `test -f apps/meteor/.scripts/set-version.js` printed MISSING. The script is dead, so no working command could be stated.
+- `packages/apps-engine/src/definition/version.ts` exports an `ENGINE_VERSION` constant that `AppPackageParser` imports instead of traversing the filesystem. — Asserted by docs/apps-engine-migration.md, but `cat packages/apps-engine/src/definition/version.ts` -> No such file, and `grep -rn ENGINE_VERSION --include=*.ts packages` returns nothing. The doc describes a stacked-PR plan, not the tree.
+- 61 workspace packages / 68 locales / ~9,170 source files / 943 spec files. — All re-counted and correct at this commit, but these are exactly the numbers the prompt says to avoid: they move with every PR, and a stale count in a sheet injected every turn is worse than no count.
+- packages/apps/src/server/compiler/AppPackageParser.ts and packages/release-action/src/utils.ts are generated files. — They matched my grep for generated-file markers, but inspecting the hits shows the strings are runtime output text ('WARNING: We automatically generated a uuid v4 id for', line 36) and a markdown comment emitted into release notes (line 141). Only packages/message-parser/tests/fixtures/allEmoji.ts carries a real do-not-edit header.
+- HISTORY.md is the repository changelog. — Inverted on checking: `grep -n '^# ' HISTORY.md | head` shows the newest entry is 6.2.11 while the current version is 8.9.0-develop, so the root HISTORY.md is frozen and the live changelogs are the per-workspace changeset CHANGELOG files. The corrected fact was then cut for the byte budget.
+- A single jest spec can be run with `yarn workspace @rocket.chat/meteor .testunit:jest <path>`. — The dot-prefixed scripts exist (apps/meteor/package.json:26-29) but nothing in the repo or CI invokes them directly, and I could not verify that Yarn 4 here runs a leading-dot script name. Unverifiable, so the sheet stops at the per-workspace command.
+- A new permission is added by appending to the single core permission list. — Incomplete: `grep -rn 'access-mcp'` shows the MCP permission is created by `Permissions.create('access-mcp', ['admin'])` in apps/meteor/ee/server/startup/mcp.ts, not in apps/meteor/server/lib/authorization/constant/permissions.ts. A one-line rule would have been wrong for EE.
+- Migration files are numbered contiguously, so the next migration is last+1. — `ls apps/meteor/server/startup/migrations/v30*.ts` shows v301 then v303 - v302 does not exist - so 'highest + 1' is the rule, not 'count + 1'. Too narrow a fact to spend sheet bytes on once qualified.
+- Every EE override file under the patches folder is installed at boot. — False, and it became candidate #5 instead: patches/index.ts imports 6 of the 7 patch files, and `grep -rn fetchContactHistory` finds only the orphan file itself plus the makeFunction call site.
+
+## The cases beside this sheet, and the three passes they survived
+
+The questions in `cases/` were drawn from the same reading of the repository, and then put
+through three independent passes, each of which found what the one before it had let through.
+
+**One** checked that every keyed path exists and belongs. It corrected keys and rejected nothing,
+which is why there is a second: a check that refuses nothing cannot tell a good question from a
+lenient reviewer.
+
+**Two** was forced to state, for every question, the one sentence that says what makes a reply
+right — and to name its three worst. It found questions whose "which single X" had eight valid
+answers, keys that credited one of thirty-eight files carrying the same generated banner, and a
+key that named a file as evidence of *absence*, which a correct reply cannot cite.
+
+**Three** repaired the keys pass two judged incomplete, under one standing rule: a key is never
+fitted to what an agent would find. Where a question was too broad to have a bounded answer, it
+was narrowed rather than padded — and in one case it refuted pass two's complaint instead of
+obeying it.
+
+**12 of 12 candidates ship.** What was dropped, and why:
+
+- candidate 7 — No single defensible answer exists. The closing clause asks, in the singular, which permission is created outside the authoritative array, but at least eight files create permissions outside it, and the key responds by listing all of them - thirteen paths that cannot be derived from the question as written. One of those thirteen, apps/meteor/app/authorization/lib/index.ts, creates no permission at all: it only defines getSettingPermissionId and a CONSTANTS object, so it is a spurious path the previous pass should have cut. Any agent answering the question literally is scored against a key that wanted a survey.
+- candidate 20 — The key fits an open-ended clause to an arbitrary subset. "Which server helpers read it" is keyed to four files, but about twenty apps/meteor/server files import rocketchat.info - bugsnag.ts, cloud/buildRegistrationData.ts, lib/migrations.ts, the metrics and statistics trees, shouldBreakInVersion.ts, AfterSaveOEmbed.ts and others - so a complete answer and a lucky four-file answer score identically, which is exactly the incompleteness that punishes the better reply. One of the four keyed readers, supportedVersionsToken.ts, reads the sibling .info file rather than the one that clause is about.
+- candidate 18 — "Which files define the standalone service images" is keyed to ee/apps/Dockerfile plus exactly one of six interchangeable service manifests, ee/apps/ddp-streamer/package.json, while account-service, authorization-service, omnichannel-transcript, presence-service and queue-worker are left out. The defensible answer - the one shared Dockerfile that builds all six - loses a key path no reasoning could have predicted, and the arbitrary example means the case scores sampling luck rather than understanding of the single-process versus microservice split.
+
+### What each shipped case cannot see
+
+Every case has a weakness; a benchmark that claims otherwise is not being read carefully. These
+are the ones the selection pass named for the questions that did ship.
+
+- *Enterprise code can replace the behaviour of a community function at runtime wit…* — getContactHistory.ts is a sixth key path no clause asks for (the question asks which override is uninstalled, not what it would have patched), and the parenthetical "note that one of them is misspelled" hands over the single hardest discovery, reducing the work to one ls of a seven-file folder against a six-line barrel.
+- *Two sibling directories whose names differ only by punctuation hold completely d…* — Shallow for its breadth: apps/meteor/package.json plus one cat of .mocharc.api.js yields five of the six paths; "differ only by punctuation" is a loose description of e2e versus end-to-end; and the two decoy runners the fact sheet does name, .mocharc.js and .mocharc.definition.js, can pull a reply toward uncredited configs.
+- *Mongo-backed collections are reached through lazily-created proxies rather than …* — "Which two files perform the registration" is ambiguous on the microservice side: registerServiceModels is defined in packages/models/src/index.ts but actually called in six ee/apps/*/src/service.ts files, none keyed, so a reply that points at the call sites instead of the definition scores zero on that clause; the fact sheet also states the mechanism and the error string almost verbatim, so little engineering is left for the treated arm.
+- *An alpha, off-by-default endpoint turns existing REST routes into tools for exte…* — docs/features/mcp-server.md names six of the nine key paths, so an agent that finds docs/features/ skips most of the reading; five of the nine sit in one directory; the doc itself is an unrequested key entry; and ee/server/startup/mcp.ts is also the one answerable clause of candidate 7, so the access-mcp fact is shared.
+- *The REST surface has a second, deliberately unstable lane whose endpoints carry …* — Key is short two files the question explicitly asks for: packages/rest-typings/src/index.ts:280-282 is literally where the namespace is exported so it stays out of the Endpoints union, and apps/meteor/server/api/index.ts:53 is the import that creates the lane's only endpoint group; it also carries docs/experimental-api-endpoints.md, which no clause asks for, while silently excluding the sibling experimental-api-endpoints-plan.md.
+- *There is an opt-in mechanism letting a user switch on unreleased UI behaviour pe…* — "Which hooks resolve a user's effective list" is fuzzy over five sibling hooks and the key credits three: useDefaultSettingFeaturePreviewList.ts is what the admin page the question explicitly mentions uses to resolve the workspace defaults, and useFeaturePreview.ts is the per-feature resolver, so a thorough reply spends effort on uncredited files.
+- *Server-side features in the Meteor app are loaded by side-effect imports rather …* — Set membership is under-determined: server/publications/index.ts (five bare imports), server/hooks/index.ts, server/settings/definitions.ts and server/lib/rooms/roomTypes/index.ts are side-effect registries by exactly the same test, so a reply that enumerates the barrels honestly includes files the key does not credit, and the question's four categories do not cleanly exclude them.
+- *Two package names in this monorepo cover the same subject area, one public and o…* — "How does the monolith reach it" is under-determined - dozens of apps/meteor files import @rocket.chat/apps or its dist subpaths, ee/server/apps/* among them, and only services/apps-engine/service.ts is credited, so that clause rewards a lucky pick rather than the right one.
+- *Admin settings are declared in code and only then persisted. Which file aggregat…* — The word "settings" in the question is the directory or filename stem of four of the five answer paths, and three of them sit in apps/meteor/server/settings/, so one ls plus the README hands over most of the key; the fifth, ISetting.ts, follows the repo's core-typings convention closely enough to be guessed without reading anything.
+- *Translation files are machine-maintained: a lint task rewrites every non-base lo…* — "The interpolation normalisation they share" names normalize.mts outright, and normalize.spec.ts plus docs/i18n.md are key entries no clause asks for; five of the seven paths sit in one directory, so a single ls of packages/i18n/src/scripts collapses most of the work.
+- *Server coverage is not collected by the unit runners — it is injected into the p…* — The word "coverage" in the question is the filename stem of three key paths (rocketchat-coverage, codecov.yml, docs/coverage.md) and "which two transpiler configs" tells the agent how many to look for; docs/coverage.md is an unrequested key entry; and .babelrc's coverage/istanbul env looks vestigial next to the swc path the action actually patches, so the "two configs" framing may be describing dead configuration.
+- *There is a scaffolding command for adding a database migration, and it edits two…* — The last clause is factually loose twice over: the folder holds three non-numbered files (index.ts, minimumVersion.ts, xrun.ts) and "two" only works if you silently discount the index the question already asked about, while minimumVersion.ts does call addMigration({version: 292}) and so is a migration, just not a file-numbered one; it also shares server/startup/migrations/index.ts and the barrel fact with candidate 2.
+
+### How completeness is scored
+
+A key file whose basename appears in the question or anywhere in the sheet is struck off before
+scoring, so the sheet can never be credited for handing over its own answer. That subset is
+identical for both arms and is what the completeness figure in `RESULTS.md` is computed on.

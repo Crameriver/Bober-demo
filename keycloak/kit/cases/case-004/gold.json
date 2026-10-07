@@ -1,0 +1,28 @@
+{
+  "case": "case-004",
+  "files": [
+    "common/src/main/java/org/keycloak/common/Profile.java",
+    "quarkus/config-api/src/main/java/org/keycloak/config/FeatureOptions.java",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/configuration/mappers/FeaturePropertyMappers.java",
+    "docs/maven-plugin/src/main/java/org/keycloak/guides/maven/Features.java",
+    "docs/guides/server/features.adoc",
+    "docs/guides/templates/features.adoc"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "Profile.java:58-240 is the single `enum Feature` with (label, Type, version, dependencies, FeatureUpdatePolicy) constructors (e.g. :78 LOGIN_V2(\"New Login Theme\", Type.DEFAULT, 2, ROLLING_NO_UPGRADE)). FeatureOptions.java:9 imports Profile and :34-56 builds the `features`, `features-disabled` and `feature-<name>` option values from Profile.getAllUnversionedFeatureNames()/getFeatureVersions(). Feat",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "common/src/main/java/org/keycloak/common/Profile.java",
+    "quarkus/config-api/src/main/java/org/keycloak/config/FeatureOptions.java",
+    "quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/configuration/mappers/FeaturePropertyMappers.java",
+    "docs/maven-plugin/src/main/java/org/keycloak/guides/maven/Features.java",
+    "docs/guides/server/features.adoc",
+    "docs/guides/templates/features.adoc"
+  ],
+  "question_narrowed": "A smoke session and a rival-answer sweep found a second defensible answer to the original wording; the question was narrowed to identify which mechanism is asked about. The answer key was NOT changed.",
+  "rival_answer_excluded": "docs/guides/server/update-compatibility.adoc as \"the guide source ... that render the feature tables\" - it imports the same macro file and renders two feature tables straight out of the documentation generator's ctx.features, grouping Profile.Feature entries by FeatureUpdatePolicy instead of by support level."
+}

@@ -1,0 +1,26 @@
+{
+  "case": "case-007",
+  "files": [
+    "service/v4_1/registry.php",
+    "service/v4_1/SugarWebServiceImplv4_1.php",
+    "service/v4_1/rest.php",
+    "service/v4_1/soap.php",
+    "service/core/webservice.php",
+    "service/core/SugarRestService.php"
+  ],
+  "hunks": {},
+  "task_path": "c",
+  "leak_flag": false,
+  "answer_paths_dropped_as_nonexistent": [],
+  "key_derivation": "service/v4_1/rest.php sets $webservice_class='SugarRestService', $webservice_path='service/core/SugarRestService.php', $webservice_impl_class='SugarWebServiceImplv4_1', $location='/service/v4_1/rest.php', $registry_path='service/v4_1/registry.php', then require_once('service/core/webservice.php'); service/v4_1/soap.php is its SOAP twin. service/core/webservice.php (first ~25 lines) chdir()s to the",
+  "verifier_removed": [],
+  "verifier_added": [],
+  "files_unleaked": [
+    "service/v4_1/registry.php",
+    "service/v4_1/SugarWebServiceImplv4_1.php",
+    "service/v4_1/rest.php",
+    "service/v4_1/soap.php",
+    "service/core/webservice.php",
+    "service/core/SugarRestService.php"
+  ]
+}

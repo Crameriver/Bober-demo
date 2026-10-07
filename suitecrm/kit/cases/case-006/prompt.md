@@ -1,0 +1,1 @@
+What is the complete set of files I must touch so that a new recurring background job appears in the admin Job dropdown with a human-readable label, is created automatically on a fresh install, can be re-created on an existing install, and actually gets executed by the scheduler?
